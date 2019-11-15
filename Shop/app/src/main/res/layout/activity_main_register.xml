@@ -16,6 +16,7 @@
         android:text="Đăng ký"
         android:gravity="center" />
     <EditText
+        android:id="@+id/register_edtPhone"
         android:layout_marginTop="20dp"
         android:hint="Số điện thoại"
         android:layout_marginLeft="30dp"
@@ -24,15 +25,7 @@
         android:layout_height="wrap_content"
         tools:ignore="HardcodedText" />
     <EditText
-        android:layout_marginTop="20dp"
-        android:hint="Tên đăng nhập"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
-		
-	<EditText
+        android:id="@+id/register_edtUser"
         android:layout_marginTop="20dp"
         android:hint="Tên tài khoản"
         android:layout_marginLeft="30dp"
@@ -40,8 +33,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="HardcodedText" />
+		
+	<EditText
+        android:id="@+id/register_edtEmail"
+        android:layout_marginTop="20dp"
+        android:hint="Email"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="HardcodedText" />
 
     <EditText
+        android:id="@+id/register_edtPass"
         android:layout_marginTop="20dp"
         android:hint="Mật khẩu"
         android:layout_marginLeft="30dp"
@@ -50,6 +54,7 @@
         android:layout_height="wrap_content"
         tools:ignore="HardcodedText" />
     <EditText
+        android:id="@+id/register_edtRePass"
         android:layout_marginTop="20dp"
         android:hint="Xác nhận Mật khẩu"
         android:layout_marginLeft="30dp"
@@ -59,6 +64,7 @@
         tools:ignore="HardcodedText" />
 
     <Button
+        android:id="@+id/register_btnRegister"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
