@@ -24,7 +24,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     String url_post = "http://192.168.1.112:8080/androidwebserver/getuser.php";
 
-    String vaitro;
+    String id;
 
     Button btnLogin;
     EditText edtUser, edtPass;
@@ -83,13 +83,13 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // response
-                        // Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
-                        if(!response.equals("1") && !response.equals("2")){
+                        //Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+                        if(response.equals("emty")){
                             Toast.makeText(getApplication(), "Thông tin đăng nhập không hợp lệ.", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getApplication(), response, Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("vaitro", vaitro);
+                            intent.putExtra("id", id);
                             startActivity(intent);
                         }
                     }
