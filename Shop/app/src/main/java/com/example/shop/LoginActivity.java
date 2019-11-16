@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
-    String url_post = "http://192.168.1.112:8080/androidwebserver/getuser.php";
+    //1String url_post = "http://192.168.1.112:8080/androidwebserver/getuser.php";
 
     String id;
 
@@ -40,17 +40,24 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int len_user = edtUser.length();
-                int len_pass = edtPass.length();
 
-                if(len_pass == 0 || len_user == 0){
-                    Toast.makeText(getApplication(), "Bạn chưa nhập thông tin.", Toast.LENGTH_LONG).show();
+                if(CheckConnect.isNetworkAvailable(getApplication())){
+                    int len_user = edtUser.length();
+                    int len_pass = edtPass.length();
+
+                    if(len_pass == 0 || len_user == 0){
+                        Toast.makeText(getApplication(), "Bạn chưa nhập thông tin.", Toast.LENGTH_LONG).show();
+                    } else {
+                        String user = edtUser.getText().toString();
+                        String pass = edtPass.getText().toString();
+
+                        doLogin(user, pass);
+                    }
                 } else {
-                    String user = edtUser.getText().toString();
-                    String pass = edtPass.getText().toString();
-
-                    doLogin(user, pass);
+                    CheckConnect.ShowToast_Short(getApplication(), "Không có kết nối internet.");
                 }
+
+
             }
         });
 
@@ -75,44 +82,50 @@ public class LoginActivity extends AppCompatActivity {
     }// Connect
 
     private void doLogin(final String user, final String pass){
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url_post,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        //Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
-                        if(response.equals("emty")){
-                            Toast.makeText(getApplication(), "Thông tin đăng nhập không hợp lệ.", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplication(), response, Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("id", id);
-                            startActivity(intent);
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
-                    }
-                }
-        ) {
+        Thread thread = new Thread(new Runnable(){
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("user", user);
-                params.put("pass", pass);
+            public void run() {
+                RequestQueue queue = Volley.newRequestQueue(getApplication());
 
-                return params;
+                StringRequest postRequest = new StringRequest(Request.Method.POST, Server.getuser,
+                        new Response.Listener<String>()
+                        {
+                            @Override
+                            public void onResponse(String response) {
+                                // response
+                                //Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+                                if(response.equals("emty")){
+                                    Toast.makeText(getApplication(), "Thông tin đăng nhập không hợp lệ.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplication(), response, Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("id", id);
+                                    startActivity(intent);
+                                }
+                            }
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // error
+                                Log.d("Error.Response", error.toString());
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams()
+                    {
+                        Map<String, String>  params = new HashMap<String, String>();
+                        params.put("user", user);
+                        params.put("pass", pass);
+
+                        return params;
+                    }
+                };
+                queue.add(postRequest);
             }
-        };
-        queue.add(postRequest);
+        });
+        thread.start();
     }
 }

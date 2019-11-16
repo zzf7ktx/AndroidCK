@@ -2,8 +2,6 @@ package com.example.shop;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister;
 
     String user, email, pass, repass, phone;
-    String url_post = "http://192.168.1.112:8080/androidwebserver/register.php";
+    //String url_post = "http://192.168.1.112:8080/androidwebserver/register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,36 +45,43 @@ public class RegisterActivity extends AppCompatActivity {
                 // check(), check all input
                 if(check(user, email, pass, repass, phone)){
                     //Log.e("test", "Success");
-                    RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url_post,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_SHORT).show();
-                                    if(response.equals("Success")){
-                                        onBackPressed();
-                                    }
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-
-                                }
-                            }){
+                    Thread thread = new Thread(new Runnable() {
                         @Override
-                        protected Map<String, String> getParams(){
-                            Map<String, String>  params = new HashMap<String, String>();
-                            params.put("user", user);
-                            params.put("pass", pass);
-                            params.put("email", email);
-                            params.put("phone", phone);
+                        public void run() {
+                            RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 
-                            return params;
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.register,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_SHORT).show();
+                                            if(response.equals("Success")){
+                                                onBackPressed();
+                                            }
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+
+                                        }
+                                    }){
+                                @Override
+                                protected Map<String, String> getParams(){
+                                    Map<String, String>  params = new HashMap<String, String>();
+                                    params.put("user", user);
+                                    params.put("pass", pass);
+                                    params.put("email", email);
+                                    params.put("phone", phone);
+
+                                    return params;
+                                }
+                            };
+                            requestQueue.add(stringRequest);
                         }
-                    };
-                    requestQueue.add(stringRequest);
+                    });
+                    thread.start();
                 }
             }
         });
