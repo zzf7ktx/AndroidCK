@@ -5,7 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
-public class CheckConect {
+public class CheckConnect {
     public static boolean isNetworkAvailable(Context context) {
         int[] networkTypes = {ConnectivityManager.TYPE_MOBILE,
                 ConnectivityManager.TYPE_WIFI};
