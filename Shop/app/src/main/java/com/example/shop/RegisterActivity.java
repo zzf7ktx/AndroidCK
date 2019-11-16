@@ -1,13 +1,14 @@
 package com.example.shop;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.shop.module.Server;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

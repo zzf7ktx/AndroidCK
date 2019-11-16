@@ -42,7 +42,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        />
                 </LinearLayout>
 
 
@@ -89,8 +90,24 @@
                         <ViewFlipper
                             android:id="@+id/viewFlipper"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp">
-
+                            android:layout_height="200dp"
+                            android:flipInterval="5000">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/banner1"/>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/banner2"/>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/banner3"/>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/banner4"/>
                         </ViewFlipper>
 
                         <LinearLayout
@@ -115,7 +132,8 @@
                                 android:id="@+id/recyclerViewHotItems"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal"/>
+                                android:orientation="horizontal"
+                                />
 
                         </LinearLayout>
 

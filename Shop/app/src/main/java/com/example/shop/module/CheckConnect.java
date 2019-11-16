@@ -1,4 +1,4 @@
-package com.example.shop;
+package com.example.shop.module;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

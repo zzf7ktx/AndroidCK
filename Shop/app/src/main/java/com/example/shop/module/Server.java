@@ -1,4 +1,5 @@
-package com.example.shop;
+package com.example.shop.module;
+
 
 public class Server {
     public static String localhost ="192.168.1.112:8080";
@@ -15,6 +16,8 @@ public class Server {
     public static String getuser = "http://"+ localhost +"/server/getuser.php";
     public static String getdata = "http://"+ localhost +"/server/getdata.php";
     public static String register = "http://"+ localhost +"/server/register.php";
+    public static String getSaleProduct = "http://"+ localhost +"/server/getsaleproduct.php";
+    public static String getProduct = "http://"+ localhost +"/server/getproduct.php";
 
 
     // đường dẫn tự đặt, cái trên ví dụ, localHost điền vào

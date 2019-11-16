@@ -1,5 +1,7 @@
 package com.example.shop.adapter;
 
+import com.example.shop.module.CheckConnect;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shop.CheckConnect;
 import com.example.shop.DetailsActivity;
 import com.example.shop.R;
 import com.example.shop.classoop.Product;
@@ -41,19 +42,18 @@ public class FlashSaleAdapter extends RecyclerView.Adapter<FlashSaleAdapter.ITem
 
     @Override
     public void onBindViewHolder(@NonNull ITemHolder holder, int position) {
-        Product sanpham =arraysanpham.get(position);
-        DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
+        Product sanpham = arraysanpham.get(position);
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtgiasanpham.setText(decimalFormat.format(sanpham.getGiasanpham())+" VNĐ");
         Picasso.get().load(sanpham.getHinhanhsanpham())
                 .placeholder(R.drawable.noimage)
                 .error(R.drawable.error)
                 .into(holder.imghinhsanpham);
-
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return arraysanpham.size();
     }
 
 
@@ -73,7 +73,6 @@ public class FlashSaleAdapter extends RecyclerView.Adapter<FlashSaleAdapter.ITem
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     CheckConnect.ShowToast_Short(context,arraysanpham.get(getAdapterPosition()).getTensanpham());
                     context.startActivity(intent);
-
                 }
             });
         }

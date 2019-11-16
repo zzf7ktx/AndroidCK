@@ -1,5 +1,7 @@
 package com.example.shop.adapter;
 
+import com.example.shop.module.CheckConnect;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shop.CheckConnect;
 import com.example.shop.DetailsActivity;
 import com.example.shop.R;
 import com.example.shop.classoop.Product;
@@ -53,7 +54,7 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.IT
 
     @Override
     public int getItemCount() {
-        return 0;
+        return arraysanpham.size();
     }
 
 

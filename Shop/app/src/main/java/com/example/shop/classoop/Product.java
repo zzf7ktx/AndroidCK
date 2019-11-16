@@ -8,6 +8,7 @@ public class Product implements Serializable {
     public Integer Giasanpham;
     public String Hinhanhsanpham;
     public String Motasanpham;
+    public int IDSanpham;
 
     public Product(int ID, String tensanpham, Integer giasanpham, String hinhanhsanpham, String motasanpham, int IDSanpham) {
         this.ID = ID;
@@ -68,5 +69,4 @@ public class Product implements Serializable {
         return IDSanpham;
     }
 
-    public int IDSanpham;
 }
