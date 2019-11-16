@@ -12,7 +12,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.shop.adapter.FlashSaleAdapter;
+import com.example.shop.adapter.NavigationAdapter;
 import com.example.shop.adapter.NewProductAdapter;
+import com.example.shop.classoop.Navigation;
 import com.example.shop.classoop.Product;
 import com.example.shop.module.Server;
 
@@ -30,6 +32,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
+import android.widget.ListView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -47,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     ViewFlipper viewFlipper1;
-    /*NavigationView navigationView;
-    ListView listView;*/
+    //NavigationView navigationView;
+
 
     // Flashsale product
     static ArrayList<Product> arrayListSale;
@@ -58,9 +61,14 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> arrayListProduct;
     RecyclerView recyclerView2;
 
+    // Navigation
+    ArrayList<Navigation> listNavigation;
+    ListView listView;
+
     // Adapter
     FlashSaleAdapter flashSaleAdapter;
     NewProductAdapter productAdapter;
+    NavigationAdapter navigationAdapter;
 
 
     Button btn;
@@ -76,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
         viewFlipper1 = findViewById(R.id.viewFlipper);
         myStartViewFlipper();
-        /*navigationView =findViewById(R.id.navigation_view);
-        listView =findViewById(R.id.listViewManHinhChinh);*/
+        //navigationView =findViewById(R.id.navigation_view);
+        listView =findViewById(R.id.listViewManHinhChinh);
         actionBar();
 
 
@@ -99,6 +107,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView2.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView2.setAdapter(productAdapter);
         // End products
+
+        // Listview navigation
+        listNavigation = new ArrayList<>();
+        //listView = this.findViewById(R.id.recyclerView);
+        navigationAdapter = new NavigationAdapter(listNavigation, getApplication());
+        GetNav();
+        //recyclerView2.setLayoutManager(new GridLayoutManager(this, 2));
+        listView.setAdapter(navigationAdapter);
+        // End navigation
     }
 
     private void actionBar() {
@@ -197,6 +214,39 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         Log.e("len", arrayListProduct.size() + "");
+                    }
+                }
+                ,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "false", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    // Nav, do du lieu
+    private void GetNav(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.getKind, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for(int i = 0; i < response.length();i++){
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                listNavigation.add(new Navigation(
+                                        jsonObject.getInt("id"),
+                                        jsonObject.getString("ten"),
+                                        jsonObject.getString("hinhanh")
+                                ));
+                                navigationAdapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
                 ,

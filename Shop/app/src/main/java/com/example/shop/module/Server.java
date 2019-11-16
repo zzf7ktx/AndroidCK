@@ -18,6 +18,7 @@ public class Server {
     public static String register = "http://"+ localhost +"/server/register.php";
     public static String getSaleProduct = "http://"+ localhost +"/server/getsaleproduct.php";
     public static String getProduct = "http://"+ localhost +"/server/getproduct.php";
+    public static String getKind = "http://"+ localhost +"/server/getkindproduct.php";
 
 
     // đường dẫn tự đặt, cái trên ví dụ, localHost điền vào
