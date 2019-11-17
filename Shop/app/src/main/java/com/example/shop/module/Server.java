@@ -13,12 +13,15 @@ public class Server {
     public static String signin ="http://"+ localhost +"/server/signin.php";
 
     // add more link to use
+    public static String server = "http://"+ localhost +"/server/";
+
     public static String getuser = "http://"+ localhost +"/server/getuser.php";
-    public static String getdata = "http://"+ localhost +"/server/getdata.php";
+    public static String getdata = "http://"+ localhost +"/server/getdatap.php";
     public static String register = "http://"+ localhost +"/server/register.php";
     public static String getSaleProduct = "http://"+ localhost +"/server/getsaleproduct.php";
     public static String getProduct = "http://"+ localhost +"/server/getproduct.php";
     public static String getKind = "http://"+ localhost +"/server/getkindproduct.php";
+    public static String getDetail = "http://"+ localhost +"/server/getdetail.php";
 
 
     // đường dẫn tự đặt, cái trên ví dụ, localHost điền vào

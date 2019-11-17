@@ -6,7 +6,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,6 +16,7 @@ import com.example.shop.adapter.NewProductAdapter;
 import com.example.shop.classoop.Navigation;
 import com.example.shop.classoop.Product;
 import com.example.shop.module.Server;
+import com.example.shop.module.SessionManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +46,8 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+    // Check getSharePreference
+    SessionManager sessionManager;
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -80,9 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer);
 
+
         toolbar = findViewById(R.id.toolbar);
 
-        viewFlipper1 = findViewById(R.id.viewFlipper);
+        viewFlipper1 = findViewById(R.id.detail_viewFlipper);
         myStartViewFlipper();
         //navigationView =findViewById(R.id.navigation_view);
         listView =findViewById(R.id.listViewManHinhChinh);
@@ -182,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "false", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "flashsale false", Toast.LENGTH_SHORT).show();
                     }
                 });
         requestQueue.add(jsonArrayRequest);
@@ -253,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "false", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "nav false", Toast.LENGTH_SHORT).show();
                     }
                 });
         requestQueue.add(jsonArrayRequest);

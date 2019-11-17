@@ -8,23 +8,132 @@ import androidx.core.view.GravityCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.shop.classoop.Product;
+import com.example.shop.module.Server;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 
 public class DetailsActivity extends AppCompatActivity {
-
+    int values;
     Toolbar toolbarDetails;
+    Product myProduct;
+
+    int soluong = 1;
+
+    ImageView imageView;
+    Button btnMinusleft, btnValues, btnMinusright, btnAddCart;
+    TextView txttensanpham, txtgiasanpham, txtmotasan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        // ket noi
+        Connect();
+
+        Intent intent = getIntent();
+        values = intent.getIntExtra("id", 0);
+
         toolbarDetails =findViewById(R.id.toolbarDetails);
 
         actionToolbar();
 
+        Log.i("id send", values + "");
+        // resquest
+        if(values == 0){
+            Toast.makeText(this, "loi id product", Toast.LENGTH_SHORT).show();
+        } else {
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.getDetail + "?id=" + values, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            for(int i = 0; i < response.length(); i++){
+                                try {
+                                    JSONObject temp = response.getJSONObject(i);
+                                    myProduct = new Product(0, null, null, null, null, 0);
+                                    myProduct.setID(temp.getInt("id"));
+                                    myProduct.setTensanpham(temp.getString("ten"));
+                                    myProduct.setGiasanpham(temp.getInt("gia"));
+                                    myProduct.setHinhanhsanpham(temp.getString("hinhanh"));
+                                    myProduct.setMotasanpham(temp.getString("mota"));
+                                    myProduct.setIDSanpham(temp.getInt("idLoai"));
+
+                                    addToWidget();
+                                }
+                                catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.i("test leng res", response.length() + "");
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.e("test res:", "fails id:" + values);
+                        }
+                    }
+            );
+            requestQueue.add(jsonArrayRequest);
+        }
+
+        //Xu li button
+        btnValues.setEnabled(false);
+
+        btnMinusleft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(soluong <= 1){
+                    Toast.makeText(DetailsActivity.this, "Đã đạt số lượng tối thiểu", Toast.LENGTH_SHORT).show();
+                } else{
+                    soluong--;
+                    btnValues.setText(soluong+"");
+                }
+            }
+        });
+
+        btnMinusright.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(soluong >= 50){
+                    Toast.makeText(DetailsActivity.this, "Đã đạt số lượng tối đa", Toast.LENGTH_SHORT).show();
+                } else {
+                    soluong++;
+                    btnValues.setText(soluong+"");
+                }
+            }
+        });
+
+        btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(DetailsActivity.this, "Đã thêm vào giỏ hàng thành công.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -44,6 +153,27 @@ public class DetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void Connect(){
+        imageView = findViewById(R.id.detail_imgView);
+
+        btnMinusleft =findViewById(R.id.buttonminusleft);
+        btnMinusright =findViewById(R.id.buttonminusright);
+        btnValues =findViewById(R.id.buttonvalue);
+        btnAddCart =findViewById(R.id.buttondatmua);
+
+        txtgiasanpham = findViewById(R.id.textviewgiasanpham);
+        txttensanpham = findViewById(R.id.textviewtenchitietsanpham);
+        txtmotasan = findViewById(R.id.textviewchitietsanpham);
+    }
+
+    private void addToWidget(){
+        Picasso.get().load(myProduct.getHinhanhsanpham()).into(imageView);
+        txttensanpham.setText(myProduct.getTensanpham());
+        DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
+        txtgiasanpham.setText(decimalFormat.format(myProduct.getGiasanpham())+" VNĐ");
+        txtmotasan.setText(myProduct.getMotasanpham());
     }
 }
 

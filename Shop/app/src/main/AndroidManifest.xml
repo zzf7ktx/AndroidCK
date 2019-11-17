@@ -17,6 +17,7 @@
         <activity android:name=".AoActivity" />
         <activity android:name=".NonActivity" />
         <activity android:name=".GiayActivity" />
+        <activity android:name=".KindActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AccountActivity" />

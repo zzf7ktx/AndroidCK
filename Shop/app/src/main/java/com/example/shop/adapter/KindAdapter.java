@@ -1,6 +1,7 @@
 package com.example.shop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
+import com.example.shop.DetailsActivity;
 import com.example.shop.R;
 import com.example.shop.classoop.Product;
 import com.squareup.picasso.Picasso;
@@ -43,6 +47,7 @@ public class KindAdapter extends BaseAdapter {
     public class ViewHolder {
         public TextView txttenKind,txtgiaKind,txtmotaKind;
         public ImageView imgKind;
+        public CardView cardView;
     }
 
     @Override
@@ -55,6 +60,7 @@ public class KindAdapter extends BaseAdapter {
             viewHolder.txttenKind=convertView.findViewById(R.id.textviewtenKind);
             viewHolder.txtgiaKind=convertView.findViewById(R.id.textviewgiaKind);
             viewHolder.txtmotaKind=convertView.findViewById(R.id.textviewmotaKind);
+            viewHolder.cardView=convertView.findViewById(R.id.kind_row_cardview);
             viewHolder.imgKind=convertView.findViewById(R.id.imageKind);
             convertView.setTag(viewHolder);
         }else{
@@ -67,6 +73,18 @@ public class KindAdapter extends BaseAdapter {
         viewHolder.txtmotaKind.setMaxLines(2);
         viewHolder.txtmotaKind.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtmotaKind.setText(sanpham.getMotasanpham());
+
+        final int temp = sanpham.getID();
+        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("id", temp);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
         Picasso.get().load(sanpham.getHinhanhsanpham())
                 .placeholder(R.drawable.noimage)
                 .error(R.drawable.error)

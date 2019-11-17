@@ -69,7 +69,7 @@ public class FlashSaleAdapter extends RecyclerView.Adapter<FlashSaleAdapter.ITem
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(context, DetailsActivity.class);
-                    intent.putExtra("thongtinsanpham",arraysanpham.get(getAdapterPosition()));
+                    intent.putExtra("id",arraysanpham.get(getAdapterPosition()).getID());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     CheckConnect.ShowToast_Short(context,arraysanpham.get(getAdapterPosition()).getTensanpham());
                     context.startActivity(intent);

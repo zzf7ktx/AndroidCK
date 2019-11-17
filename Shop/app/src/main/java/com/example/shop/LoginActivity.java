@@ -2,6 +2,7 @@ package com.example.shop;
 
 import com.example.shop.module.Server;
 import com.example.shop.module.CheckConnect;
+import com.example.shop.module.SessionManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,12 +34,18 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtUser, edtPass;
     TextView txtCreate, txtForgot;
 
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_login);
 
         intent = new Intent(getApplication(), MainActivity.class);
+        sessionManager = new SessionManager(this);
+        checkConnected();
+
+        setContentView(R.layout.activity_main_login);
+
         Connect();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +93,7 @@ public class LoginActivity extends AppCompatActivity {
     }// Connect
 
     private void doLogin(final String user, final String pass){
-        if(user.equals("admin") && pass.equals("admin")){
-            intent.putExtra("id", id);
+        if((user.equals("admin") && pass.equals("admin"))){
             startActivity(intent);
         } else {
 
@@ -106,7 +112,9 @@ public class LoginActivity extends AppCompatActivity {
                                     if(response.equals("emty")){
                                         Toast.makeText(getApplication(), "Thông tin đăng nhập không hợp lệ.", Toast.LENGTH_LONG).show();
                                     } else {
-                                        intent.putExtra("id", id);
+                                        int id = Integer.parseInt(response);
+                                        sessionManager.SetLogin(true);
+                                        sessionManager.SetUser(id);
                                         startActivity(intent);
                                     }
                                 }
@@ -136,5 +144,11 @@ public class LoginActivity extends AppCompatActivity {
             thread.start();
         }
 
+    }
+
+    private void checkConnected(){
+        if(sessionManager.Check()){
+            startActivity(intent);
+        }
     }
 }

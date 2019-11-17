@@ -88,7 +88,7 @@
 
 
                         <ViewFlipper
-                            android:id="@+id/viewFlipper"
+                            android:id="@+id/detail_viewFlipper"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:flipInterval="5000">

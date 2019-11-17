@@ -101,17 +101,19 @@
                         android:text="Chi tiết sản phẩm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <TextView
+                            android:id="@+id/textviewchitietsanpham"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="5dp"
                             android:paddingBottom="10dp"
-                            android:textSize="18sp"
-                            android:id="@+id/textviewchitietsanpham"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:textSize="18sp" />
                     </ScrollView>
                 </LinearLayout>
             </LinearLayout>
@@ -136,12 +138,11 @@
                 app:expandedTitleTextAppearance="@android:color/transparent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <ViewFlipper
-                    android:id="@+id/viewFlipper"
+                <ImageView
+                    android:id="@+id/detail_imgView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
-
-                </ViewFlipper>
+                </ImageView>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

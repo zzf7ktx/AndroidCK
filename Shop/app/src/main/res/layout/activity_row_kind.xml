@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+        android:id="@+id/kind_row_cardview"
         app:cardCornerRadius="4dp"
         app:cardBackgroundColor="#ffffff"
         android:layout_width="match_parent"
