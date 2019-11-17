@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
+        android:background="#189EFF"
         android:id="@+id/toolbarDetails"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
@@ -142,6 +143,7 @@
                     android:id="@+id/detail_imgView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp">
+
                 </ImageView>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

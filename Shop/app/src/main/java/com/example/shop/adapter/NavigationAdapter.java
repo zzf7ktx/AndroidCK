@@ -1,7 +1,9 @@
 package com.example.shop.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -26,6 +28,7 @@ public class NavigationAdapter extends BaseAdapter {
         this.arrayListloaisp = arrayListloaisp;
         this.context = context;
     }
+
 
     @Override
     public int getCount() {

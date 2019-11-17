@@ -33,7 +33,7 @@
                     <TextView
                         android:textSize="20sp"
                         android:text="@string/titleListItems"
-                        android:textColor="#F44336"
+                        android:textColor="#444444"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -77,7 +77,7 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.Toolbar
-                            android:background="#F44336"
+                            android:background="#189EFF"
                             android:id="@+id/toolbar"
                             app:title="@string/toolBarTitleName"
                             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                             <TextView
                                 android:textSize="20sp"
                                 android:text="@string/titleFlashSale"
-                                android:textColor="#F44336"
+                                android:textColor="#444444"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
@@ -150,12 +150,15 @@
             android:id="@+id/navigation_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start">
+            android:layout_gravity="start"
+            android:background="#fff">
 
             <ListView
                 android:id="@+id/listViewManHinhChinh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:divider="@android:color/transparent"
+                android:layout_margin="5dp">
             </ListView>
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
