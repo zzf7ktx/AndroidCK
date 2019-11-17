@@ -8,9 +8,10 @@
     tools:context=".PayActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:background="#F44336"
+        android:background="#189EFF"
         android:id="@+id/toolbarPay"
         app:title="@string/toolBarPay"
+        app:titleTextColor="#FFF"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
