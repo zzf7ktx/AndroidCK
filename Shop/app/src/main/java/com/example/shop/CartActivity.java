@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
@@ -74,6 +75,14 @@ public class CartActivity extends AppCompatActivity {
         }
 
         ImportData();
+
+
+        int tongBill = 0;
+        for(int i = 0; i < listCartProduct.size(); i++){
+            tongBill += listCartProduct.get(i).getGiaSanPham()*listCartProduct.get(i).getSoLuong();
+        }
+        DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
+        txtTotalBill.setText("Tổng hóa đơn: "+ decimalFormat.format(tongBill)+"Đ");
 
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
