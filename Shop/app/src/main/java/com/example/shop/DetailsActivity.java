@@ -25,8 +25,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.shop.classoop.CartProduct;
+import com.example.shop.classoop.ListCartProduct;
 import com.example.shop.classoop.Product;
 import com.example.shop.module.Server;
+import com.example.shop.module.SessionManager;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -34,11 +37,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
     int values;
     Toolbar toolbarDetails;
     Product myProduct;
+
+    ListCartProduct listCart;
 
     int soluong = 1;
 
@@ -131,6 +137,27 @@ public class DetailsActivity extends AppCompatActivity {
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SessionManager sessionManager = new SessionManager(getApplication());
+                listCart = sessionManager.GetCart();
+
+                // check san pham trong gio hang local
+                int idSP = myProduct.getID();
+                int size = listCart.getList().size();
+                boolean kt = false;
+
+                for(int i = 0; i < size; i++){
+                    if(idSP == listCart.getList().get(i).getIdSanPham()){
+                        listCart.getList().get(i).setSoLuong(listCart.getList().get(i).getSoLuong());
+                        kt = true;
+                    }
+                }
+
+                if(!kt){
+                    listCart.getList().add(new CartProduct(sessionManager.GetUser(), idSP, Integer.parseInt((String) btnValues.getText())));
+                }
+
+                sessionManager.SetCart(listCart);
+
                 Toast.makeText(DetailsActivity.this, "Đã thêm vào giỏ hàng thành công.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -153,6 +180,20 @@ public class DetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menugiohang:
+                Intent intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menuAccount:
+                Intent intent_1 = new Intent(this, AccountActivity.class);
+                startActivity(intent_1);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void Connect(){

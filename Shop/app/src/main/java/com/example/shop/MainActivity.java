@@ -47,7 +47,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     // Check getSharePreference
-    SessionManager sessionManager;
+    // SessionManager sessionManager;
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
