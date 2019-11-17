@@ -38,7 +38,7 @@ public class CartActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
     ListCartProduct list;
-    ArrayList<CartProduct> listCartProduct;
+    public static ArrayList<CartProduct> listCartProduct;
 
     ListView lvCart;
     TextView txtTotalBill, txtThongBao;
@@ -46,7 +46,7 @@ public class CartActivity extends AppCompatActivity {
     Button btnPay;
 
     CartAdapter cartAdapter;
-    ArrayList<Cart> listCart;
+    public static ArrayList<Cart> listCart;
 
     Toolbar toolbarCart;
 
@@ -67,7 +67,9 @@ public class CartActivity extends AppCompatActivity {
         list = sessionManager.GetCart();
         listCartProduct = list.getList();
 
-        if(listCartProduct.size() > 0){
+        Toast.makeText(getApplication(), listCartProduct.size() + "", Toast.LENGTH_SHORT).show();
+
+        if (listCartProduct.size() > 0) {
             txtThongBao.setVisibility(View.INVISIBLE);
         }
 
@@ -81,28 +83,16 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        btnPayNext.setText("Cập nhật số lượng từng sản phẩm.");
         btnPayNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addSoluong();
+                onBackPressed();
             }
         });
     }
 
-    /// Nhap so luong vao vi khong the nhap trong luc lay du lieu tu server.
-    private void addSoluong(){
-        synchronized (listCart){
-            for(int i = 0; i < listCartProduct.size(); i++){
-                listCart.get(i).setSoluongsp(listCartProduct.get(i).getSoLuong());
-                cartAdapter.notifyDataSetChanged();
-            }
-        }
-
-    }
-
-    private void Connect(){
-        btnPay =findViewById(R.id.btnBuy);
+    private void Connect() {
+        btnPay = findViewById(R.id.btnBuy);
         btnPayNext = findViewById(R.id.btnMuaHang);
         txtTotalBill = findViewById(R.id.txtTotalBill);
         lvCart = findViewById(R.id.lvCart);
@@ -112,7 +102,7 @@ public class CartActivity extends AppCompatActivity {
 
     private void actionToolbar() {
         setSupportActionBar(toolbarCart);
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         toolbarCart.setNavigationOnClickListener(new View.OnClickListener() {
@@ -123,40 +113,55 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    private void ImportData(){
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        for(int i = 0; i < listCartProduct.size(); i = i + 1){
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.getDetail + "?id=" + listCartProduct.get(i).getIdSanPham(), null,
-                    new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-                            try {
-                                JSONObject temp = response.getJSONObject(0);
-                                //synchronized (listCart){
-                                    listCart.add(new Cart(
-                                            temp.getInt("id"),
-                                            temp.getString("ten"),
-                                            temp.getInt("gia"),
-                                            temp.getString("hinhanh"),
-                                            0
-                                            // So luong san pham add sau
-                                    ));
-                                //}
-                                cartAdapter.notifyDataSetChanged();
-                            }
-                            catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                        }
-                    });
-            requestQueue.add(jsonArrayRequest);
+    private void ImportData() {
+        // Cach 1: dung SQL truy van:
+//        RequestQueue requestQueue = Volley.newRequestQueue(this);
+//
+//        for(int i = 0; i < listCartProduct.size(); i = i + 1){
+//            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.getDetail + "?id=" + listCartProduct.get(i).getIdSanPham(), null,
+//                    new Response.Listener<JSONArray>() {
+//                        @Override
+//                        public void onResponse(JSONArray response) {
+//                            try {
+//                                JSONObject temp = response.getJSONObject(0);
+//                                //synchronized (listCart){
+//                                    listCart.add(new Cart(
+//                                            temp.getInt("id"),
+//                                            temp.getString("ten"),
+//                                            temp.getInt("gia"),
+//                                            temp.getString("hinhanh"),
+//                                            0
+//                                            // So luong san pham add sau
+//                                    ));
+//                                //}
+//                                cartAdapter.notifyDataSetChanged();
+//                            }
+//                            catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    },
+//                    new Response.ErrorListener() {
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//
+//                        }
+//                    });
+//            requestQueue.add(jsonArrayRequest);
+//      }
+//  }
+        // Cach 2:
+        for(int i = 0; i < listCartProduct.size(); i++){
+            listCart.add(new Cart(
+                    listCartProduct.get(i).getIdSanPham(),
+                    listCartProduct.get(i).getTenSanPham(),
+                    listCartProduct.get(i).getGiaSanPham(),
+                    listCartProduct.get(i).getHinhAnhSanPham(),
+                    listCartProduct.get(i).getSoLuong()
+            ));
+            cartAdapter.notifyDataSetChanged();
+            Toast.makeText(this, listCart.get(i).getIdsp() + "", Toast.LENGTH_SHORT).show();
         }
+
     }
 }
