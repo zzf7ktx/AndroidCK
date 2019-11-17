@@ -47,7 +47,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     // Check getSharePreference
-    // SessionManager sessionManager;
+    SessionManager sessionManager;
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Navigation> listNavigation;
     ListView listView;
 
+
+
     // Adapter
     FlashSaleAdapter flashSaleAdapter;
     NewProductAdapter productAdapter;
@@ -74,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     Button btn;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sessionManager = new SessionManager(this);
+        sessionManager.Clear();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

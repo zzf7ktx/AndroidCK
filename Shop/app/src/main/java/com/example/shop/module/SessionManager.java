@@ -3,6 +3,7 @@ package com.example.shop.module;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.shop.classoop.Cart;
 import com.example.shop.classoop.CartProduct;
 import com.example.shop.classoop.ListCartProduct;
 import com.google.gson.Gson;
@@ -58,5 +59,10 @@ public class SessionManager {
         json = preferences.getString("MyCart", "");
         Gson gson = new Gson();
         return gson.fromJson(json, ListCartProduct.class);
+    }
+
+    public void Clear(){
+        editor.clear();
+        editor.commit();
     }
 }

@@ -134,6 +134,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
+        // Luu vao local va chuyen activity
         btnAddCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,15 +146,24 @@ public class DetailsActivity extends AppCompatActivity {
                 int size = listCart.getList().size();
                 boolean kt = false;
 
+                // kiem tra ton tai gia tri trong database
                 for(int i = 0; i < size; i++){
                     if(idSP == listCart.getList().get(i).getIdSanPham()){
-                        listCart.getList().get(i).setSoLuong(listCart.getList().get(i).getSoLuong());
+                        listCart.getList().get(i).setSoLuong(listCart.getList().get(i).getSoLuong() + Integer.parseInt(btnValues.getText()+""));
                         kt = true;
+                        break;
                     }
                 }
 
                 if(!kt){
-                    listCart.getList().add(new CartProduct(sessionManager.GetUser(), idSP, Integer.parseInt((String) btnValues.getText())));
+                    listCart.getList().add(new CartProduct(
+                            sessionManager.GetUser(),
+                            idSP,
+                            Integer.parseInt((String) btnValues.getText()),
+                            myProduct.getTensanpham(),
+                            myProduct.getGiasanpham(),
+                            myProduct.getHinhanhsanpham()
+                    ));
                 }
 
                 sessionManager.SetCart(listCart);

@@ -16,8 +16,4 @@ public class ListCartProduct {
     public void setList(ArrayList<CartProduct> list) {
         this.list = list;
     }
-
-    public void setItemList(CartProduct cartProduct, int i) {
-        list.set(i, cartProduct);
-    }
 }
