@@ -29,7 +29,7 @@
                     android:id="@+id/textviewtengiay"
                     android:text="Tên giày"
                     android:textSize="18sp"
-                    android:textColor="#0f0be9"
+                    android:textColor="#444444"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -37,7 +37,7 @@
                     android:textSize="18sp"
                     android:id="@+id/textviewgiagiay"
                     android:text="Giá giày"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/textlight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView

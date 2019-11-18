@@ -28,7 +28,7 @@
                     android:id="@+id/textviewtenao"
                     android:text="Tên áo"
                     android:textSize="18sp"
-                    android:textColor="#0f0be9"
+                    android:textColor="#444444"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -36,7 +36,7 @@
                     android:textSize="18sp"
                     android:id="@+id/textviewgiaao"
                     android:text="Giá áo"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/textlight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView

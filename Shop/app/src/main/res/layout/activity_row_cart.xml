@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Tên món hàng"
-            android:textColor="#333"
+            android:textColor="#444444"
             android:textSize="25sp" />
 
         <TextView
@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Giá món hàng"
-            android:textColor="#333"
+            android:textColor="@color/textDart"
+            android:textStyle="bold"
             android:textSize="25sp" />
         <LinearLayout
             android:gravity="center"

@@ -6,4 +6,5 @@
     <color name="colorToolBar">#189EFF</color>
     <color name="onTouchList">#ddd</color>
     <color name="textDart">#333</color>
+    <color name="textlight">#f20</color>
 </resources>
