@@ -3,6 +3,7 @@ package com.example.shop;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.shop.adapter.OrdersAdapter;
 import com.example.shop.classoop.Navigation;
+import com.example.shop.classoop.Order;
 import com.example.shop.classoop.Product;
 import com.example.shop.classoop.UserInfo;
 import com.example.shop.module.Server;
@@ -35,12 +38,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AccountActivity extends AppCompatActivity {
-
+    Context context;
     Toolbar toolbarAccount;
     SessionManager sessionManager;
     TextView tvMail;
     TextView tvName;
     TextView tvLogout;
+    TextView tvQLDH;
     ArrayList<UserInfo> userInfos;
     int id;
 
@@ -57,6 +61,7 @@ public class AccountActivity extends AppCompatActivity {
         tvName = findViewById(R.id.tvAccount);
         id = sessionManager.GetUser();
         tvLogout = findViewById(R.id.tvLogout);
+        tvQLDH = findViewById(R.id.tvQLDH);
         userInfos = new ArrayList<>();
         String url = Server.getinfo + "?id=" + id;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
@@ -91,7 +96,15 @@ public class AccountActivity extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
         actionBar();
       //  GetInfo();
-
+        tvQLDH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), HisOrderActivity.class);
+                intent.putExtra("id", id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
         tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
