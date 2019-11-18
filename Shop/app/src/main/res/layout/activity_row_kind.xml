@@ -38,7 +38,7 @@
                     android:textSize="18sp"
                     android:id="@+id/textviewgiaKind"
                     android:text="Giá giày"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/textDart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView

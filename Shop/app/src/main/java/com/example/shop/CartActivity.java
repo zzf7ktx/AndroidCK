@@ -84,11 +84,18 @@ public class CartActivity extends AppCompatActivity {
         DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
         txtTotalBill.setText("Tổng hóa đơn: "+ decimalFormat.format(tongBill)+"Đ");
 
+        final int bill = tongBill;
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CartActivity.this, PayActivity.class);
-                startActivity(intent);
+                if(bill != 0){
+                    Intent intent = new Intent(CartActivity.this, PayActivity.class);
+                    intent.putExtra("tongbill", bill);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CartActivity.this, "Đơn hàng chưa có sản phẩm.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

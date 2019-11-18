@@ -1,24 +1,25 @@
 <?php
 
-$kind = $_GET['kind'];
+$idkhachhang = $_GET['khachhang'];
+
 
 class sanpham{
-    function sanpham($id, $ten, $gia, $hinhanh, $mota, $idLoai){
+    function sanpham($id, $ten, $gia, $hinhanh, $mota, $idLoai, $soluong){
         $this->id = $id;
         $this->ten = $ten;
         $this->gia = $gia;
         $this->hinhanh = $hinhanh;
         $this->mota = $mota;
         $this->idLoai = $idLoai;
+        $this->soluong = $soluong
     }
 }
-
 $arr = array();
 
 $connect = mysqli_connect("localhost","root","123456","shopquanao");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT sp.id, sp.tenSanPham, sp.giaSanPham, sp.hinhAnhSanPham, sp.moTaSanPham, sp.idLoaiSanPham FROM sanpham AS sp INNER JOIN loaisanpham as loai WHERE loai.id = sp.idLoaiSanPham and loai.tenLoaiSanPham = '$kind'";
+$query =  "SELECT * FROM giohang AS gh WHERE gh.idkhachhang = $idkhachhang";
 $data = mysqli_query($connect, $query);
 
 $arr = array();
