@@ -2,10 +2,11 @@
 $id = $_GET['id'];
 
 class donhang{
-    function donhang($id, $nguoimua, $tongtien, $diachi){
+    function donhang($id, $nguoimua, $tongtien, $hinhanh, $diachi){
         $this->id = $id;
-        $this->ten = $nguoimua;
-        $this->gia = $tongtien;
+        $this->nguoimua = $nguoimua;
+        $this->tongtien = $tongtien;
+	$this->hinhanh = $hinhanh;
         $this->diachi = $diachi;
     }
 }
@@ -21,7 +22,7 @@ $data = mysqli_query($connect, $query);
 $arr = array();
 
 while($row = mysqli_fetch_assoc($data)){
-    array_push($arr, new donhang($row['id'], $row['nguoimua'], $row['tongtien'], $row['diachi']));
+    array_push($arr, new donhang($row['id'], $row['nguoimua'], $row['tongtien'], $row['hinhanh'], $row['diachi']));
 }
 
 echo json_encode($arr);
