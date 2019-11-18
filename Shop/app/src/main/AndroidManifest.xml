@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.shop">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".DepActivity"></activity>
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+            android:name=".HisOrderActivity"
+            android:label="@string/title_activity_his_order"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".DepActivity" />
         <activity android:name=".QuanActivity" />
         <activity android:name=".AoActivity" />
         <activity android:name=".NonActivity" />

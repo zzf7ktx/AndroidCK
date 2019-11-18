@@ -7,5 +7,6 @@
     <string name="toolBarCart">Giỏ hàng</string>
     <string name="toolBarPay">Xác nhận thông tin mua hàng</string>
     <string name="toolBarAccount">Tài khoản</string>
+    <string name="title_activity_his_order">HisOrderActivity</string>
 
 </resources>
