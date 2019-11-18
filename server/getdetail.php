@@ -1,6 +1,6 @@
 <?php
 
-$kind = $_GET['kind'];
+$id = $_GET['id'];
 
 class sanpham{
     function sanpham($id, $ten, $gia, $hinhanh, $mota, $idLoai){
@@ -18,7 +18,7 @@ $arr = array();
 $connect = mysqli_connect("localhost","root","123456","shopquanao");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT sp.id, sp.tenSanPham, sp.giaSanPham, sp.hinhAnhSanPham, sp.moTaSanPham, sp.idLoaiSanPham FROM sanpham AS sp INNER JOIN loaisanpham as loai WHERE loai.id = sp.idLoaiSanPham and loai.tenLoaiSanPham = '$kind'";
+$query =  "SELECT * FROM sanpham AS sp WHERE sp.id = $id";
 $data = mysqli_query($connect, $query);
 
 $arr = array();
