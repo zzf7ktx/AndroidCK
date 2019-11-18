@@ -8,6 +8,8 @@
     <androidx.appcompat.widget.Toolbar
         android:background="#189EFF"
         android:id="@+id/toolbarDetails"
+        app:title="Shop"
+        app:titleTextColor="#FFF"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize" />
 
