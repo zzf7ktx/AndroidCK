@@ -45,6 +45,8 @@ public class CartActivity extends AppCompatActivity {
     TextView txtTotalBill, txtThongBao;
     Button btnPayNext;
     Button btnPay;
+    int id;
+    String url;
 
     CartAdapter cartAdapter;
     public static ArrayList<Cart> listCart;
@@ -74,7 +76,10 @@ public class CartActivity extends AppCompatActivity {
             txtThongBao.setVisibility(View.INVISIBLE);
         }
 
-        ImportData();
+        id = sessionManager.GetUser();
+
+        url = Server.server + "getcart.php?khachhang=" + id;
+        ImportData(url);
 
 
         int tongBill = 0;
@@ -129,45 +134,47 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    private void ImportData() {
+    private void ImportData(String url) {
         // Cach 1: dung SQL truy van:
-//        RequestQueue requestQueue = Volley.newRequestQueue(this);
-//
-//        for(int i = 0; i < listCartProduct.size(); i = i + 1){
-//            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.getDetail + "?id=" + listCartProduct.get(i).getIdSanPham(), null,
-//                    new Response.Listener<JSONArray>() {
-//                        @Override
-//                        public void onResponse(JSONArray response) {
-//                            try {
-//                                JSONObject temp = response.getJSONObject(0);
-//                                //synchronized (listCart){
-//                                    listCart.add(new Cart(
-//                                            temp.getInt("id"),
-//                                            temp.getString("ten"),
-//                                            temp.getInt("gia"),
-//                                            temp.getString("hinhanh"),
-//                                            0
-//                                            // So luong san pham add sau
-//                                    ));
-//                                //}
-//                                cartAdapter.notifyDataSetChanged();
-//                            }
-//                            catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    },
-//                    new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//
-//                        }
-//                    });
-//            requestQueue.add(jsonArrayRequest);
-//      }
-//  }
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject temp = response.getJSONObject(0);
+                                //synchronized (listCart){
+                                listCart.add(new Cart(
+                                        temp.getInt("id"),
+                                        temp.getString("ten"),
+                                        temp.getInt("gia"),
+                                        temp.getString("hinhanh"),
+                                        temp.getInt("soluong")
+                                        // So luong san pham add sau
+                                ));
+                                //}
+                                cartAdapter.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+                ,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+            requestQueue.add(jsonArrayRequest);
+
+
         // Cach 2:
-        for(int i = 0; i < listCartProduct.size(); i++){
+        for (int i = 0; i < listCartProduct.size(); i++) {
             listCart.add(new Cart(
                     listCartProduct.get(i).getIdSanPham(),
                     listCartProduct.get(i).getTenSanPham(),

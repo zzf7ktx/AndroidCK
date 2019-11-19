@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AoActivity">
+    tools:context=".OrderActivity">
     <androidx.appcompat.widget.Toolbar
         android:background="@color/colorToolBar"
-        app:title="Ao"
+        app:title="Order"
         app:titleTextColor="#FFF"
-        android:id="@+id/toolbarAo"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <ListView
-        android:id="@+id/lvAo"
+        android:id="@+id/lvOrder"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

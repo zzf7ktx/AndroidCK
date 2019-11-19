@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
 
         viewFlipper1 = findViewById(R.id.detail_viewFlipper);
+
         myStartViewFlipper();
         //navigationView =findViewById(R.id.navigation_view);
         listView =findViewById(R.id.listViewManHinhChinh);

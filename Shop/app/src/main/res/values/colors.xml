@@ -7,4 +7,5 @@
     <color name="onTouchList">#ddd</color>
     <color name="textDart">#333</color>
     <color name="textlight">#f20</color>
+    <color name="done">#98eb34</color>
 </resources>

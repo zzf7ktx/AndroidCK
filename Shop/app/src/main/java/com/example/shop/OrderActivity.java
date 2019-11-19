@@ -2,6 +2,12 @@ package com.example.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,19 +16,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.shop.adapter.KindAdapter;
-import com.example.shop.adapter.OrdersAdapter;
+import com.example.shop.adapter.OrderAdapter;
 import com.example.shop.classoop.Order;
+import com.example.shop.classoop.OrderProduct;
 import com.example.shop.classoop.Product;
 import com.example.shop.module.Server;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,36 +28,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HisOrderActivity extends AppCompatActivity {
-    ArrayList<Order> orders;
-    OrdersAdapter ordersAdapter;
-    ListView lvOrders;
+public class OrderActivity extends AppCompatActivity {
+    ArrayList<OrderProduct> orderProducts;
+    OrderAdapter orderAdapter;
+    ListView lvOrder;
 
     Toolbar toolbar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_his_order);
+        setContentView(R.layout.activity_order);
         // var
-        orders = new ArrayList<>();
-        ordersAdapter = new OrdersAdapter(getApplication(), orders);
-        lvOrders = findViewById(R.id.lvOrders);
-        lvOrders.setAdapter(ordersAdapter);
+        orderProducts = new ArrayList<>();
+        orderAdapter = new OrderAdapter(getApplication(), orderProducts);
+        lvOrder = findViewById(R.id.lvOrder);
+        lvOrder.setAdapter(orderAdapter);
 
         Intent intent = getIntent();
-        int value = intent.getIntExtra("id", -1);
+        int value = intent.getIntExtra("idDonHang", 0);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(value+"");
 
-        String url = Server.server + "hisorder.php?id=" + value;
+        String url = Server.server + "getorder.php?id=" + value;
 
-        GetOrders(url);
+        GetProduct(url);
     }
 
-    private void GetOrders(String url){
+    private void GetProduct(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -69,16 +66,15 @@ public class HisOrderActivity extends AppCompatActivity {
                         for(int i = 0; i < response.length();i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
-                                orders.add(new Order(
-                                        jsonObject.getInt("id"),
-                                        jsonObject.getInt("nguoimua"),
-                                        jsonObject.getInt("tongtien"),
+                                orderProducts.add(new OrderProduct(
+                                        jsonObject.getInt("madonhang"),
+                                        jsonObject.getInt("masanpham"),
+                                        jsonObject.getString("ten"),
+                                        jsonObject.getInt("gia"),
                                         jsonObject.getString("hinhanh"),
-                                        jsonObject.getString("diachi"),
-                                        jsonObject.getInt("trangthai"),
-                                        jsonObject.getString("ngaytao")
+                                        jsonObject.getInt("soluong")
                                 ));
-                                ordersAdapter.notifyDataSetChanged();
+                                orderAdapter.notifyDataSetChanged();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
