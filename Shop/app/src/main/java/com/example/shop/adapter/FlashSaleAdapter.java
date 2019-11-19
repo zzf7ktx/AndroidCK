@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shop.DetailsActivity;
 import com.example.shop.R;
 import com.example.shop.classoop.Product;
+import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -71,7 +72,7 @@ public class FlashSaleAdapter extends RecyclerView.Adapter<FlashSaleAdapter.ITem
                     Intent intent=new Intent(context, DetailsActivity.class);
                     intent.putExtra("id",arraysanpham.get(getAdapterPosition()).getID());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    CheckConnect.ShowToast_Short(context,arraysanpham.get(getAdapterPosition()).getTensanpham());
+                    CheckConnect.ShowToast_Short(context, String.valueOf(arraysanpham.get(getAdapterPosition()).getID()));
                     context.startActivity(intent);
                 }
             });

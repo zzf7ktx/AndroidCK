@@ -18,11 +18,6 @@
             android:name=".HisOrderActivity"
             android:label="@string/title_activity_his_order"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".DepActivity" />
-        <activity android:name=".QuanActivity" />
-        <activity android:name=".AoActivity" />
-        <activity android:name=".NonActivity" />
-        <activity android:name=".GiayActivity" />
         <activity android:name=".KindActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
