@@ -4,14 +4,12 @@ $idkhachhang = $_GET['khachhang'];
 
 
 class sanpham{
-    function sanpham($id, $ten, $gia, $hinhanh, $mota, $idLoai, $soluong){
+    function sanpham($id, $ten, $gia, $hinhanh, $soluong){
         $this->id = $id;
         $this->ten = $ten;
         $this->gia = $gia;
         $this->hinhanh = $hinhanh;
-        $this->mota = $mota;
-        $this->idLoai = $idLoai;
-        $this->soluong = $soluong
+        $this->soluong = $soluong;
     }
 }
 $arr = array();
@@ -25,7 +23,7 @@ $data = mysqli_query($connect, $query);
 $arr = array();
 
 while($row = mysqli_fetch_assoc($data)){
-    array_push($arr, new sanpham($row['id'], $row['tensanpham'], $row['gia'], $row['url'], $row['mota'], $row['danhmuc']));
+    array_push($arr, new sanpham($row['id'], $row['tensanpham'], $row['gia'], $row['url'], $row['soluong']));
 }
 
 echo json_encode($arr);
