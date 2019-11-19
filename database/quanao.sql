@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS diachi (
 CREATE TABLE IF NOT EXISTS giohang (
 	masanpham INT(11),
 	makhachhang INT(11),
-	soluong INT(11)
+	soluong INT(11),
 	PRIMARY KEY(masanpham,makhachhang)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

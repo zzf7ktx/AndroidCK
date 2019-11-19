@@ -35,10 +35,12 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtCreate, txtForgot;
 
     SessionManager sessionManager;
-
+    static boolean count;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        count = false;
 
         intent = new Intent(getApplication(), MainActivity.class);
         sessionManager = new SessionManager(this);
@@ -81,6 +83,33 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     } // onCreate
+
+    @Override
+    protected void onResume() {
+        count = false;
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+        if(!count){
+            count = true;
+            Toast.makeText(this, "Quay về lần nữa để thoát chương trình", Toast.LENGTH_SHORT).show();
+        } else{
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+        }
+    }
+
 
     void Connect(){
         txtCreate=findViewById(R.id.login_txt_create);

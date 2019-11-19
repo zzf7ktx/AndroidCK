@@ -2,7 +2,7 @@ package com.example.shop.module;
 
 
 public class Server {
-    public static String localhost ="192.168.1.186";
+    public static String localhost ="192.168.1.112:8080";
     public static String LoaiSanPham ="http://"+ localhost +"/server/getloaisanpham.php";
     public static String SanPhamMoiNhat="http://"+ localhost+ "/server/getsanphammoinhat.php";
     public static String SanPham = "http://"+ localhost+ "/server/getsanpham.php";

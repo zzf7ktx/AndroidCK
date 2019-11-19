@@ -109,10 +109,11 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tvLogout.setSelected(true);
-                sessionManager.SetLogin(false);
-                sessionManager.SetUser(-1);
                 sessionManager.Clear();
-                finish();
+                sessionManager.SetLogin(false);
+
+                Intent comeBack = new Intent(AccountActivity.this, LoginActivity.class);
+                startActivity(comeBack);
             }
         });
     }

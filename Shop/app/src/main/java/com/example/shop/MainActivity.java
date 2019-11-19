@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
 
 
-
     // Adapter
     FlashSaleAdapter flashSaleAdapter;
     NewProductAdapter productAdapter;
@@ -100,9 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
         myStartViewFlipper();
         //navigationView =findViewById(R.id.navigation_view);
-        listView =findViewById(R.id.listViewManHinhChinh);
+        listView = findViewById(R.id.listViewManHinhChinh);
         actionBar();
-
 
 
         // RecyclerView flashsale
@@ -154,21 +152,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent_12 = new Intent(this, LoginActivity.class);
         switch (item.getItemId()) {
             case R.id.menugiohang:
-                Intent intent = new Intent(this, CartActivity.class);
-                startActivity(intent);
+                if (sessionManager.GetUser() != 0) {
+                    Intent intent = new Intent(this, CartActivity.class);
+                    startActivity(intent);
+                } else {
+                    startActivity(intent_12);
+                }
                 break;
             case R.id.menuAccount:
-                if(sessionManager.GetUser() != 0)
-                {
+                if (sessionManager.GetUser() != 0) {
                     Intent intent_1 = new Intent(this, AccountActivity.class);
                     startActivity(intent_1);
-                }
-
-                else
-                {
-                    Intent intent_12 = new Intent(this, LoginActivity.class);
+                } else {
                     startActivity(intent_12);
                 }
 
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i = 0; i < response.length();i++){
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 arrayListSale.add(new Product(
@@ -222,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i = 0; i < response.length();i++){
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 arrayListProduct.add(new Product(
@@ -252,14 +250,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Nav, do du lieu
-    private void GetNav(){
+    private void GetNav() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Server.getKind, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i = 0; i < response.length();i++){
+                        for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 listNavigation.add(new Navigation(
@@ -285,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // viewFlipper
-    private void myStartViewFlipper(){
+    private void myStartViewFlipper() {
 
         Animation in = AnimationUtils.loadAnimation(this, android.R.anim.slide_in_left);
         Animation out = AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);

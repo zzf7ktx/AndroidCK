@@ -70,8 +70,6 @@ public class CartActivity extends AppCompatActivity {
         list = sessionManager.GetCart();
         listCartProduct = list.getList();
 
-        Toast.makeText(getApplication(), listCartProduct.size() + "", Toast.LENGTH_SHORT).show();
-
         if (listCartProduct.size() > 0) {
             txtThongBao.setVisibility(View.INVISIBLE);
         }
@@ -183,7 +181,6 @@ public class CartActivity extends AppCompatActivity {
                     listCartProduct.get(i).getSoLuong()
             ));
             cartAdapter.notifyDataSetChanged();
-            Toast.makeText(this, listCart.get(i).getIdsp() + "", Toast.LENGTH_SHORT).show();
         }
 
     }
