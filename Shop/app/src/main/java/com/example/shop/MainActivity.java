@@ -44,6 +44,8 @@ import org.json.*;
 
 import java.util.ArrayList;
 
+import static com.example.shop.R.menu.menu;
+
 
 public class MainActivity extends AppCompatActivity {
     // Check getSharePreference
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sessionManager = new SessionManager(this);
         drawerLayout = findViewById(R.id.drawer);
 
 
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     private void actionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+        toolbar.setNavigationIcon(R.drawable.hamburger_icon);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,8 +160,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menuAccount:
-                Intent intent_1 = new Intent(this, AccountActivity.class);
-                startActivity(intent_1);
+                if(sessionManager.GetUser() != 0)
+                {
+                    Intent intent_1 = new Intent(this, AccountActivity.class);
+                    startActivity(intent_1);
+                }
+
+                else
+                {
+                    Intent intent_12 = new Intent(this, LoginActivity.class);
+                    startActivity(intent_12);
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }

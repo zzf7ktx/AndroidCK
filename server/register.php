@@ -10,10 +10,7 @@ mysqli_query($connect,"SET NAME 'utf8");
 
 $requery = "SELECT * FROM khachhang";
 $data = mysqli_query($connect, $requery);
-
-$no_of_rows = mysqli_num_rows($data) + 1;
-
-$query = "INSERT INTO khachhang VALUES($no_of_rows,'$user', '$email', '$pass', 2, '$phone')";
+$query = "INSERT INTO khachhang VALUES(NULL ,'$user', '$phone', '$email', '$pass', NULL, DATE_FORMAT(CURRENT_DATE(), "%d-%m-%Y"))";
 
 if(mysqli_query($connect, $query)){
     echo "Success";

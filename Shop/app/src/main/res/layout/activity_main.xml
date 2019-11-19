@@ -7,8 +7,6 @@
     tools:context="com.example.shop.MainActivity"
     android:orientation="vertical">
 
-
-
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
         android:layout_width="match_parent"
@@ -20,150 +18,124 @@
             android:layout_height="match_parent">
 
             <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:textSize="20sp"
-                        android:text="@string/titleListItems"
-                        android:textColor="#444444"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:textStyle="bold" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-                </LinearLayout>
-
-
-            </androidx.core.widget.NestedScrollView>
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:background="#FFFFFF"
-                android:id="@+id/appbar"
-                android:fitsSystemWindows="true"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:background="#FFFFFF"
-                    android:id="@+id/collapsing_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:fitsSystemWindows="true"
-                    app:contentScrim="?attr/colorPrimary"
-                    app:expandedTitleMarginEnd="64dp"
-                    app:expandedTitleMarginStart="48dp"
-                    app:expandedTitleTextAppearance="@android:color/transparent"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.Toolbar
-                            android:background="#189EFF"
-                            android:id="@+id/toolbar"
-                            app:title="@string/toolBarTitleName"
+                    <ViewFlipper
+                        android:id="@+id/detail_viewFlipper"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:flipInterval="5000">
+                        <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="?attr/actionBarSize">
-
-                        </androidx.appcompat.widget.Toolbar>
-
-
-
-                        <ViewFlipper
-                            android:id="@+id/detail_viewFlipper"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/banner1"/>
+                        <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:flipInterval="5000">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/banner1"/>
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/banner2"/>
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/banner3"/>
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/banner4"/>
-                        </ViewFlipper>
-
-                        <LinearLayout
+                            android:layout_height="match_parent"
+                            android:src="@drawable/banner2"/>
+                        <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="140dp"
-                            android:layout_marginBottom="10dp"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent"
+                            android:src="@drawable/banner3"/>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/banner4"/>
+                    </ViewFlipper>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:textSize="20sp"
+                            android:text="@string/titleFlashSale"
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textStyle="bold" />
 
 
-
-                            <TextView
-                                android:textSize="20sp"
-                                android:text="@string/titleFlashSale"
-                                android:textColor="#444444"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:textStyle="bold" />
-
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerViewHotItems"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                />
-
-                        </LinearLayout>
-
-
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewHotItems"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            />
                     </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:textSize="20sp"
+                    android:text="@string/titleListItems"
+                    android:textColor="#444444"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold" />
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            </com.google.android.material.appbar.AppBarLayout>
-
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_view"
+        <com.google.android.material.appbar.AppBarLayout
+            android:background="#FFFFFF"
+            android:id="@+id/appbar"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#fff">
-
-            <ListView
-                android:id="@+id/listViewManHinhChinh"
+            android:layout_height="wrap_content">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@android:color/transparent"
-                android:layout_margin="5dp">
-            </ListView>
-        </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+                <androidx.appcompat.widget.Toolbar
+                    android:background="#189EFF"
+                    android:id="@+id/toolbar"
+                    app:title="@string/toolBarTitleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin">
 
+                </androidx.appcompat.widget.Toolbar>
 
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#fff">
+
+        <ListView
+            android:id="@+id/listViewManHinhChinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:divider="@android:color/transparent"></ListView>
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>
 
 </LinearLayout>

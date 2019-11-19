@@ -23,16 +23,18 @@
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:singleLine="true"/>
     <EditText
         android:id="@+id/register_edtUser"
         android:layout_marginTop="20dp"
-        android:hint="Tên tài khoản"
+        android:hint="Họ và tên"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:singleLine="true"/>
 		
 	<EditText
         android:id="@+id/register_edtEmail"
@@ -42,7 +44,8 @@
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:singleLine="true"/>
 
     <EditText
         android:id="@+id/register_edtPass"
@@ -52,7 +55,9 @@
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        android:inputType="textPassword"
+        tools:ignore="HardcodedText"
+        android:singleLine="true"/>
     <EditText
         android:id="@+id/register_edtRePass"
         android:layout_marginTop="20dp"
@@ -61,7 +66,9 @@
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        android:inputType="textPassword"
+        tools:ignore="HardcodedText"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/register_btnRegister"

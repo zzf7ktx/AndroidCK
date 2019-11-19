@@ -54,7 +54,7 @@ public class HisOrderActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(value+"");
 
-        String url = Server.server + "hisorder.php?id=" + value;
+        String url = Server.getHisOrder + "?id=" + value;
 
         GetOrders(url);
     }

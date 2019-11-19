@@ -90,7 +90,7 @@ public class AccountActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplication(), "product-kind false", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "info not found", Toast.LENGTH_SHORT).show();
                     }
                 });
         requestQueue.add(jsonArrayRequest);
