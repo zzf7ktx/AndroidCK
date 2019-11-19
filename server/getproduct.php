@@ -13,16 +13,16 @@ class sanpham{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopquanao");
+$connect = mysqli_connect("localhost","root","123456","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT * FROM sanpham";
+$query =  "SELECT sp.id, sp.tensanpham, sp.nhanhang, sp.gia, sp.mota, sp.danhmuc, sp.luotxem, sp.giamgia, sp.ngaytao, sp.soluong, sp.rate, ha.url FROM sanpham AS sp INNER JOIN hinhanh AS ha ON sp.id = ha.thuocve AND ha.loai = 2";
 $data = mysqli_query($connect, $query);
 
 $arr = array();
 
 while($row = mysqli_fetch_assoc($data)){
-    array_push($arr, new sanpham($row['id'], $row['tenSanPham'], $row['giaSanPham'], $row['hinhAnhSanPham'], $row['moTaSanPham'], $row['idLoaiSanPham']));
+    array_push($arr, new sanpham($row['id'], $row['tensanpham'], $row['gia'], $row['url'], $row['mota'], $row['danhmuc']));
 }
 
 echo json_encode($arr);

@@ -11,10 +11,10 @@ class khachhang{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopquanao");
+$connect = mysqli_connect("localhost","root","123456","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT * FROM khachhang WHERE id=$id";
+$query =  "SELECT kh.id, kh.ten , kh.sodienthoai as sdt, kh.email, kh.phanquyen, kh.ngaytao, ha.url FROM khachhang AS kh LEFT JOIN hinhanh AS ha ON kh.id = ha.thuocve AND ha.loai = 4 WHERE kh.id=$id";
 $data = mysqli_query($connect, $query);
 
 $arr = array();

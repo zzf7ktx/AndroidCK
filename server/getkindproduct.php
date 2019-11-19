@@ -10,16 +10,16 @@ class loaisanpham{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopquanao");
+$connect = mysqli_connect("localhost","root","123456","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT * FROM loaisanpham";
+$query =  "SELECT * FROM danhmuc as dm INNER JOIN hinhanh AS ha ON dm.id = ha.thuocve AND ha.loai = 1";
 $data = mysqli_query($connect, $query);
 
 $arr = array();
 
 while($row = mysqli_fetch_assoc($data)){
-    array_push($arr, new loaisanpham($row['id'], $row['tenLoaiSanPham'], $row['hinhAnhLoaiSanPham']));
+    array_push($arr, new loaisanpham($row['id'], $row['tendanhmuc'], $row['url']));
 }
 
 echo json_encode($arr);
