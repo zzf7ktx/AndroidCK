@@ -42,7 +42,7 @@ public class CartActivity extends AppCompatActivity {
     public static ArrayList<CartProduct> listCartProduct;
 
     ListView lvCart;
-    TextView txtTotalBill, txtThongBao;
+    static TextView txtTotalBill, txtThongBao;
     Button btnPayNext;
     Button btnPay;
     int id;
@@ -79,15 +79,9 @@ public class CartActivity extends AppCompatActivity {
         url = Server.server + "getcart.php?khachhang=" + id;
         ImportData(url);
 
+        setTotalBill();
 
-        int tongBill = 0;
-        for(int i = 0; i < listCartProduct.size(); i++){
-            tongBill += listCartProduct.get(i).getGiaSanPham()*listCartProduct.get(i).getSoLuong();
-        }
-        DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
-        txtTotalBill.setText("Tổng hóa đơn: "+ decimalFormat.format(tongBill)+"Đ");
-
-        final int bill = tongBill;
+        final int bill = getBill();
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +102,20 @@ public class CartActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private static int getBill(){
+        int res = 0;
+        for(int i = 0; i < listCartProduct.size(); i++){
+            res += listCartProduct.get(i).getGiaSanPham()*listCartProduct.get(i).getSoLuong();
+        }
+        return res;
+    }
+
+    public static void setTotalBill() {
+        int tongBill = getBill();
+        DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
+        txtTotalBill.setText("Tổng hóa đơn: "+ decimalFormat.format(tongBill)+"Đ");
     }
 
     private void Connect() {

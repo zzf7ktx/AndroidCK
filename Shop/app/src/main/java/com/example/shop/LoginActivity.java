@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     StringRequest postRequest = new StringRequest(Request.Method.POST, Server.getuser,
                             new Response.Listener<String>()
-                            {
+                             {
                                 @Override
                                 public void onResponse(String response) {
                                     // response
