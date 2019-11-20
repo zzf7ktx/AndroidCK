@@ -25,6 +25,8 @@ public class Server {
     public static String getDetail = "http://"+ localhost +"/server/getdetail.php";
     public static String getOrder = "http://"+ localhost +"/server/getorder.php";
     public static String getHisOrder = "http://"+ localhost +"/server/hisorder.php";
+    public static String upOrder = "http://"+ localhost +"/server/postorder.php";
+    public static String getUpOrderDetail = "http://"+ localhost +"/server/postorderdetail.php";
 
 
     // đường dẫn tự đặt, cái trên ví dụ, localHost điền vào
