@@ -2,7 +2,7 @@ package com.example.shop.module;
 
 
 public class Server {
-    public static String localhost ="192.168.1.112:8080";
+    public static String localhost ="10.10.171.207";
     public static String LoaiSanPham ="http://"+ localhost +"/server/getloaisanpham.php";
     public static String SanPhamMoiNhat="http://"+ localhost+ "/server/getsanphammoinhat.php";
     public static String SanPham = "http://"+ localhost+ "/server/getsanpham.php";
@@ -25,6 +25,8 @@ public class Server {
     public static String getDetail = "http://"+ localhost +"/server/getdetail.php";
     public static String getOrder = "http://"+ localhost +"/server/getorder.php";
     public static String getHisOrder = "http://"+ localhost +"/server/hisorder.php";
+    public static String upOrder = "http://"+ localhost +"/server/postorder.php";
+    public static String getUpOrderDetail = "http://"+ localhost +"/server/postorderdetail.php";
 
 
     // đường dẫn tự đặt, cái trên ví dụ, localHost điền vào

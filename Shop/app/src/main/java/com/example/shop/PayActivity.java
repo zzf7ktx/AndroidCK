@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -49,8 +50,14 @@ public class PayActivity extends AppCompatActivity {
         txtTotalMoney = findViewById(R.id.txtTotalMoney);
         btnPay = findViewById(R.id.btnPay);
 
+        final Intent getTong = getIntent();
+        final int TongBill = getTong.getIntExtra("tongbill", 0);
+
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txtTotalMoney.setText("Tổng hóa đơn: " + decimalFormat.format(getIntent().getIntExtra("tongbill", 0)) + "VNĐ");
+        txtTotalMoney.setText("Tổng hóa đơn: " + decimalFormat.format(TongBill) + "VNĐ");
+
+        // thuc hien up dữ liệu đơn hàng
+        btnPay.setEnabled(true);
 
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,65 +65,93 @@ public class PayActivity extends AppCompatActivity {
                 // get local
                 SessionManager sessionManager = new SessionManager(getApplication());
                 arrayList = sessionManager.GetCart().getList();
-                int id_temp = sessionManager.GetUser();
+                final int id_temp = sessionManager.GetUser();
                 // luu server
                 String url = Server.server + "donhang.php?id=" + id_temp + "&diachi=" + edtAdress.getText();
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                        new Response.Listener<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//                                Log.i("res donhang:", "success");
+//                            }
+//                        }
+//                        , new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.i("res donhang:", "fail");
+//                    }
+//                });
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.upOrder,
                         new Response.Listener<String>() {
                             @Override
-                            public void onResponse(String response) {
-                                Log.i("res donhang:", "success");
+                            public void onResponse(final String response) {
+                                // tra ve id don hang
+                                for(int i = 0; i < arrayList.size(); i++){
+                                    String url = Server.server + "postorderdetail.php";
+                                    final CartProduct temp = arrayList.get(i);
+
+                                    RequestQueue requestQueue1 = Volley.newRequestQueue(getApplication());
+
+                                    StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url,
+                                            new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    Log.i("chitietdonhang :", "success");
+                                                    Log.i("res chitietdonhang : ",response);
+                                                }
+                                            },
+                                            new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    Log.i("chitietdonhang :", "fail");
+                                                }
+                                            }) {
+                                        @Override
+                                        protected Map<String, String> getParams() throws AuthFailureError {
+                                            Map<String, String>  params = new HashMap<String, String>();
+                                            params.put("masanpham", temp.getIdSanPham()+"");
+                                            params.put("madonhang", response);
+                                            //params.put("giasanpham", temp.getGiaSanPham() + "");
+                                            params.put("soluong", temp.getSoLuong()+"");
+
+                                            return params;
+                                        }
+                                    };
+                                    requestQueue1.add(stringRequest1);
+                                    Toast.makeText(PayActivity.this, "Đơn hàng đang được xác nhận." + response, Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                        , new Response.ErrorListener() {
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // loi khi tra ve id don hang
+                                Toast.makeText(PayActivity.this, "Xin lôi, hiện ứng dụng xãy ra lỗi hệ thống, không phép đặt đơn hàng này.", Toast.LENGTH_SHORT).show();
+                            }
+                        }){
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("res donhang:", "fail");
+                    protected Map<String, String> getParams(){
+                        Map<String, String>  params = new HashMap<String, String>();
+                        params.put("makhachhang", id_temp + "");
+                        params.put("diachi", edtAdress.getText().toString());
+                        params.put("tongtien", TongBill + "");
+
+                        return params;
                     }
-                });
+                };
+
                 requestQueue.add(stringRequest);
 
-                for(int i = 0; i < arrayList.size(); i++){
-                    url = Server.server + "chitietdonhang.php";
-                    final CartProduct temp = arrayList.get(i);
-                    StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    Log.i("chitietdonhang :", "success");
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Log.i("chitietdonhang :", "fail");
-                                }
-                            }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String>  params = new HashMap<String, String>();
-                            params.put("masanpham", temp.getIdSanPham()+"");
-                            params.put("tensanpham", temp.getTenSanPham());
-                            params.put("giasanpham", temp.getGiaSanPham() + "");
-                            params.put("soluong", temp.getSoLuong()+"");
-
-                            return params;
-                        }
-                    };
-                    requestQueue.add(stringRequest1);
-                }
-
                 // xoa local
-
                 sessionManager.Clear();
                 sessionManager.SetUser(id_temp);
             }
         });
 
         actionToolbar();
-
     }
 
     private void actionToolbar() {

@@ -78,22 +78,32 @@ public class CartAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int value = Integer.parseInt(finalViewHolder.btvalue.getText()+"");
-                if( value <= 1 ){
+                if( value < 1 ){
                     //finalViewHolder.btleft.setEnabled(false);
                 } else {
                     value--;
-                    if(value < 2){
+                    if(value < 1){
                         finalViewHolder.btleft.setEnabled(false);
+                        CartActivity.listCartProduct.remove(position);
+                        CartActivity.listCart.remove(position);
                     }
                     if(value < 50){
                         finalViewHolder.btright.setEnabled(true);
                     }
                     finalViewHolder.btvalue.setText(value +"");
-                    CartActivity.listCartProduct.get(position).setSoLuong(value);
+                    if(value != 0){
+                        CartActivity.listCartProduct.get(position).setSoLuong(value);
+                        CartActivity.listCart.get(position).setSoluongsp(value);
+                    } else {
+
+                    }
 
                     SessionManager sessionManager = new SessionManager(context);
-                    ListCartProduct listCartProduct = new ListCartProduct(CartActivity.listCartProduct);
-                    sessionManager.SetCart(listCartProduct);
+                    ListCartProduct listCProduct = new ListCartProduct(CartActivity.listCartProduct);
+                    sessionManager.SetCart(listCProduct);
+                    CartAdapter.this.notifyDataSetChanged();
+
+                    CartActivity.setTotalBill();
                 }
             }
         });
@@ -113,10 +123,13 @@ public class CartAdapter extends BaseAdapter {
                     }
                     finalViewHolder.btvalue.setText(value +"");
                     CartActivity.listCartProduct.get(position).setSoLuong(value);
+                    CartActivity.listCart.get(position).setSoluongsp(value);
 
                     SessionManager sessionManager = new SessionManager(context);
                     ListCartProduct listCartProduct = new ListCartProduct(CartActivity.listCartProduct);
                     sessionManager.SetCart(listCartProduct);
+
+                    CartActivity.setTotalBill();
                 }
             }
         });
