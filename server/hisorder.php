@@ -15,10 +15,10 @@ class donhang{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopbanhang");
+$connect = mysqli_connect("localhost","root","","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT dh.id, dh.trangthai, dh.ngaytao, dh.khachhang, dh.tongtien, CONCAT(dc.diachicuthe, dc.phuongxa, dc.quanhuyen, dc.tinhthanh) as diachiT, ha.url FROM donhang AS dh LEFT JOIN hinhanh AS ha ON dh.id = ha.thuocve AND ha.loai = 5 INNER JOIN diachi as dc ON dh.diachi = dc.makhachhang WHERE khachhang = $id";
+$query =  "SELECT dh.id, dh.trangthai, dh.ngaytao, dh.khachhang, dh.tongtien, CONCAT(dc.diachicuthe, dc.phuongxa, dc.quanhuyen, dc.tinhthanh) as diachiT, ha.url FROM donhang AS dh LEFT JOIN hinhanh AS ha ON dh.id = ha.thuocve AND ha.loai = 5 INNER JOIN diachi as dc ON dh.diachi = dc.id WHERE khachhang = $id";
 $data = mysqli_query($connect, $query);
 
 $arr = array();

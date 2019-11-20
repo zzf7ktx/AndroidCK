@@ -17,6 +17,7 @@ import com.example.shop.module.Server;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -53,12 +54,24 @@ public class HisOrderActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(value+"");
+        actionToolbar();
 
         String url = Server.getHisOrder + "?id=" + value;
 
         GetOrders(url);
     }
+    private void actionToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
 
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
     private void GetOrders(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 

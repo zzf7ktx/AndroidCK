@@ -2,7 +2,7 @@
 $user = $_POST["user"];
 $pass = md5($_POST["pass"]);
 
-$connect = mysqli_connect("localhost","root","123456","shopbanhang");
+$connect = mysqli_connect("localhost","root","","shopbanhang");
 mysqli_query($connect,"SET NAME 'utf8");
 
 

@@ -14,10 +14,10 @@ class donhang{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopbanhang");
+$connect = mysqli_connect("localhost","root","","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT ctdh.madonhang, ctdh.masanpham, ctdh.soluongsanpham*sp.gia AS tonggia, sp.tensanpham, ha.url, ctdh.soluongsanpham FROM donhang AS dh INNER JOIN chitietdonhang AS ctdh INNER JOIN sanpham AS sp INNER JOIN hinhanh AS ha ON dh.id = ctdh.madonhang AND ctdh.masanpham = sp.id AND sp.id = ha.thuocve AND ha.loai = 2 AND dh.id = $id";
+$query =  "SELECT ctdh.madonhang, ctdh.masanpham, ctdh.soluongsanpham*sp.gia AS tonggia, sp.tensanpham, ha.url, ctdh.soluongsanpham FROM donhang AS dh INNER JOIN chitietdonhang AS ctdh INNER JOIN sanpham AS sp ON dh.id = ctdh.madonhang AND ctdh.masanpham = sp.id AND dh.id = $id LEFT JOIN hinhanh AS ha ON ctdh.masanpham = ha.thuocve AND ha.loai = 2";
 $data = mysqli_query($connect, $query);
 
 $arr = array();

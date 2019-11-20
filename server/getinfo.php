@@ -11,7 +11,7 @@ class khachhang{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopbanhang");
+$connect = mysqli_connect("localhost","root","","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
 $query =  "SELECT kh.id, kh.ten , kh.sodienthoai as sdt, kh.email, kh.phanquyen, kh.ngaytao, ha.url FROM khachhang AS kh LEFT JOIN hinhanh AS ha ON kh.id = ha.thuocve AND ha.loai = 4 WHERE kh.id=$id";

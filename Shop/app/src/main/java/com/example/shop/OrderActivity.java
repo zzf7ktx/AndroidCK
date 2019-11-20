@@ -2,10 +2,12 @@ package com.example.shop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -50,10 +52,24 @@ public class OrderActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(value+"");
+        actionToolbar();
 
         String url = Server.getOrder + "?id=" + value;
 
         GetProduct(url);
+    }
+
+    private void actionToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void GetProduct(String url){

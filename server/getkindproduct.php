@@ -10,10 +10,10 @@ class loaisanpham{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopbanhang");
+$connect = mysqli_connect("localhost","root","","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
-$query =  "SELECT * FROM danhmuc as dm INNER JOIN hinhanh AS ha ON dm.id = ha.thuocve AND ha.loai = 1";
+$query =  "SELECT * FROM danhmuc as dm LEFT JOIN hinhanh AS ha ON dm.id = ha.thuocve AND ha.loai = 1";
 $data = mysqli_query($connect, $query);
 
 $arr = array();

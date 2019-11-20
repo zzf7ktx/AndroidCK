@@ -15,7 +15,7 @@ class sanpham{
 
 $arr = array();
 
-$connect = mysqli_connect("localhost","root","123456","shopbanhang");
+$connect = mysqli_connect("localhost","root","","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
 $query =  "SELECT sp.id, sp.tensanpham, sp.nhanhang, sp.gia, sp.mota, sp.danhmuc, sp.luotxem, sp.giamgia, sp.ngaytao, sp.soluong, sp.rate, ha.url FROM sanpham AS sp INNER JOIN hinhanh AS ha ON sp.id = ha.thuocve AND ha.loai = 2 AND sp.id = $id";

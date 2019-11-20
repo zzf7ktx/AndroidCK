@@ -1,8 +1,8 @@
 <?php
-$id = $_GET['id'];
-$diachi = $_GET['diachi'];
+$id = $_POST['id'];
+$diachi = $_POST['diachi'];
 
-$connect = mysqli_connect("localhost","root","123456","shopquanao");
+$connect = mysqli_connect("localhost","root","123456","shopbanhang");
 mysqli_set_charset($connect, "utf8");
 
 $get_num_row = mysqli_num_rows(mysqli_query($connect, "SELECT * FROM donhang")) + 1;
