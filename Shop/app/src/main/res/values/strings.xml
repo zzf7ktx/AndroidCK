@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Shop</string>
     <string name="titleListItems">Sản phẩm bán chạy</string>
-    <string name="titleFlashSale">FlashSale</string>
+    <string name="titleFlashSale">Flash Deals</string>
     <string name="toolBarTitleName">Trang chủ</string>
     <string name="toolBarDetails">Chi tiết sản phẩm</string>
     <string name="toolBarCart">Giỏ hàng</string>
