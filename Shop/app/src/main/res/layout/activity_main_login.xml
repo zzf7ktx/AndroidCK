@@ -6,8 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.shop.LoginActivity"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_margin="10dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/onlinestore"
+        android:layout_margin="10dp"
+        android:scaleType="centerInside"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,21 +20,25 @@
         android:text="Welcome to Shop"
         android:gravity="center" />
     <EditText
+        android:id="@+id/login_edt_user"
         android:layout_marginTop="20dp"
         android:hint="Tên tài khoản"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:singleLine="true"/>
     <EditText
+        android:id="@+id/login_edt_pass"
         android:layout_marginTop="20dp"
         android:hint="Mật khẩu"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="HardcodedText" />
+        tools:ignore="HardcodedText"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnLogin"
@@ -45,14 +54,16 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/login_txt_forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quên mật khẩu"
             android:layout_weight="1"
             android:layout_marginLeft="25dp"/>
         <TextView
-            android:id="@+id/txtCreate"
+            android:id="@+id/login_txt_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tạo tài khoản"

@@ -11,6 +11,7 @@
         android:id="@+id/toolbarAccount"
         android:background="@color/colorToolBar"
         app:title="@string/toolBarAccount"
+        app:titleTextColor="#FFF"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
@@ -43,7 +44,7 @@
                         android:id="@+id/tvAccount"
                         android:layout_margin="3dp"
                         android:textStyle="bold"
-                        android:text="Tên tài khoản"
+                        android:text="Username"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
@@ -77,11 +78,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp">
                         </ImageView>
+
                         <TextView
-                            android:layout_marginLeft="10dp"
-                            android:layout_gravity="center"
+                            android:id="@+id/tvQLDH"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
                             android:text="Quản lý đơn hàng"
                             android:textColor="#000000"
                             android:textSize="20sp">
@@ -177,12 +180,13 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp">
                         </ImageView>
+
                         <TextView
-                            android:layout_marginLeft="10dp"
-                            android:layout_gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Cài đặt"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="Hỗ trợ"
                             android:textColor="#000000"
                             android:textSize="20sp">
 
@@ -202,12 +206,14 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp">
                         </ImageView>
+
                         <TextView
-                            android:layout_marginLeft="10dp"
-                            android:layout_gravity="center"
+                            android:id="@+id/tvLogout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Hỗ trợ"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="Đăng xuất"
                             android:textColor="#000000"
                             android:textSize="20sp">
 

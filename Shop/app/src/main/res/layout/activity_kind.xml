@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".QuanActivity">
+    tools:context=".KindActivity">
     <androidx.appcompat.widget.Toolbar
         android:background="@color/colorToolBar"
-        app:title="Quan"
-        android:id="@+id/toolbarAo"
+        app:title="Giày"
+        app:titleTextColor="#FFF"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
     </androidx.appcompat.widget.Toolbar>
     <ListView
-        android:id="@+id/lvQuan"
+        android:id="@+id/lvKind"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

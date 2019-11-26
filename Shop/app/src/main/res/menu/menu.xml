@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
    <item
        android:id="@+id/menugiohang"
-       android:icon="@drawable/muahang"
+       android:icon="@drawable/cart"
        android:title="Giỏ hàng"
        app:showAsAction="always"/>
 
     <item
-        android:icon="@drawable/logout"
+        android:icon="@drawable/account"
         android:id="@+id/menuAccount"
         app:showAsAction="always"
         android:title="Logout" />

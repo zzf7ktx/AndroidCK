@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#B3190E</color>
+    <color name="colorPrimaryDark">#189EFF</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorToolBar">#F44336</color>
+    <color name="colorToolBar">#189EFF</color>
+    <color name="onTouchList">#ddd</color>
+    <color name="textDart">#333</color>
+    <color name="textlight">#f20</color>
+    <color name="done">#98eb34</color>
 </resources>
