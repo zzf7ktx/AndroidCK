@@ -26,10 +26,14 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.shop.classoop.CartProduct;
+import com.example.shop.classoop.FavoriteProduct;
 import com.example.shop.classoop.ListCartProduct;
+import com.example.shop.classoop.ListFavoriteProduct;
 import com.example.shop.classoop.Product;
 import com.example.shop.module.Server;
 import com.example.shop.module.SessionManager;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -45,11 +49,13 @@ public class DetailsActivity extends AppCompatActivity {
     Product myProduct;
 
     ListCartProduct listCart;
+    ListFavoriteProduct listFavorite;
 
     int soluong = 1;
 
     ImageView imageView;
     Button btnMinusleft, btnValues, btnMinusright, btnAddCart;
+    Button btnFavorite;
     TextView txttensanpham, txtgiasanpham, txtmotasan;
 
     @Override
@@ -171,6 +177,41 @@ public class DetailsActivity extends AppCompatActivity {
                 Toast.makeText(DetailsActivity.this, "Đã thêm vào giỏ hàng thành công.", Toast.LENGTH_SHORT).show();
             }
         });
+        btnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SessionManager sessionManager = new SessionManager(getApplication());
+                listFavorite = sessionManager.GetFavorite();
+
+                int idSP = myProduct.getID();
+                int size = listFavorite.getList().size();
+                boolean kt = false;
+
+                for(int i=0; i<size; i++)
+                {
+                    if(idSP == listFavorite.getList().get(i).getIdSanPham()){
+                        Toast.makeText(DetailsActivity.this, "Bạn đã thích sản phẩm", Toast.LENGTH_SHORT).show();
+                        kt=true;
+                        break;
+                    }
+                }
+
+                if(!kt)
+                {
+                    listFavorite.getList().add(new FavoriteProduct(
+                            sessionManager.GetUser(),
+                            idSP,
+                            myProduct.getTensanpham(),
+                            myProduct.getGiasanpham(),
+                            myProduct.getHinhanhsanpham()
+                    ));
+                }
+
+                sessionManager.SetFavorite(listFavorite);
+
+                Toast.makeText(DetailsActivity.this, "Đã thích", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -213,6 +254,7 @@ public class DetailsActivity extends AppCompatActivity {
         btnMinusright =findViewById(R.id.buttonminusright);
         btnValues =findViewById(R.id.buttonvalue);
         btnAddCart =findViewById(R.id.buttondatmua);
+        btnFavorite = findViewById(R.id.buttonfavorite);
 
         txtgiasanpham = findViewById(R.id.textviewgiasanpham);
         txttensanpham = findViewById(R.id.textviewtenchitietsanpham);

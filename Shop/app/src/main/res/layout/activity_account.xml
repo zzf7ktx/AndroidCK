@@ -44,7 +44,6 @@
                         android:id="@+id/tvAccount"
                         android:layout_margin="3dp"
                         android:textStyle="bold"
-                        android:text="Username"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
@@ -54,7 +53,6 @@
                         android:id="@+id/tvMail"
                         android:layout_margin="3dp"
                         android:textStyle="bold"
-                        android:text="gmail@gmail.com"
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_width="wrap_content"
@@ -106,6 +104,7 @@
                             android:layout_height="50dp">
                         </ImageView>
                         <TextView
+                            android:id="@+id/tvSPYT"
                             android:layout_marginLeft="10dp"
                             android:layout_gravity="center"
                             android:layout_width="match_parent"
@@ -182,11 +181,12 @@
                         </ImageView>
 
                         <TextView
+                            android:id="@+id/tvTTCN"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
-                            android:text="Hỗ trợ"
+                            android:text="Thông tin cá nhân"
                             android:textColor="#000000"
                             android:textSize="20sp">
 

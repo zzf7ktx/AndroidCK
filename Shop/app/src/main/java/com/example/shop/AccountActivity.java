@@ -45,6 +45,8 @@ public class AccountActivity extends AppCompatActivity {
     TextView tvName;
     TextView tvLogout;
     TextView tvQLDH;
+    TextView tvSPYT;
+    TextView tvTTCN;
     ArrayList<UserInfo> userInfos;
     int id;
 
@@ -62,6 +64,9 @@ public class AccountActivity extends AppCompatActivity {
         id = sessionManager.GetUser();
         tvLogout = findViewById(R.id.tvLogout);
         tvQLDH = findViewById(R.id.tvQLDH);
+        tvSPYT = findViewById(R.id.tvSPYT);
+        tvTTCN = findViewById(R.id.tvTTCN);
+
         userInfos = new ArrayList<>();
         String url = Server.getinfo + "?id=" + id;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
@@ -70,13 +75,14 @@ public class AccountActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for(int i = 0; i < response.length();i++){
+                        for (int i = 0; i < response.length();i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 userInfos.add (new UserInfo(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("ten"),
-                                        jsonObject.getString("email")
+                                        jsonObject.getString("email"),
+                                        jsonObject.getString("sdt")
                                 ));
                                 tvMail.setText(userInfos.get(0).getEmail());
                                 tvName.setText(userInfos.get(0).getTen());
@@ -114,6 +120,20 @@ public class AccountActivity extends AppCompatActivity {
 
                 Intent comeBack = new Intent(AccountActivity.this, LoginActivity.class);
                 startActivity(comeBack);
+            }
+        });
+        tvSPYT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountActivity.this, FavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
+        tvTTCN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountActivity.this, PersonalActivity.class);
+                startActivity(intent);
             }
         });
     }

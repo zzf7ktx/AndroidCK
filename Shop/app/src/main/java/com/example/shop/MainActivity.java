@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn;
 
+    static boolean count;
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -85,12 +88,15 @@ public class MainActivity extends AppCompatActivity {
         sessionManager.Clear();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sessionManager = new SessionManager(this);
         drawerLayout = findViewById(R.id.drawer);
+
+        count = false;
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -130,6 +136,30 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(navigationAdapter);
         // End navigation
     }
+
+    @Override
+    protected void onResume() {
+        count = false;
+        super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!count)
+        {
+            count = true;
+            Toast.makeText(this, "Quay về lần nữa để thoát chương trình", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+        }
+    }
+
+
 
     private void actionBar() {
         setSupportActionBar(toolbar);

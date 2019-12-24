@@ -7,30 +7,38 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_online_shop"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".personal.PasswordActivity"/>
+        <activity android:name=".personal.MailActivity"
+            android:parentActivityName=".PersonalActivity"/>
+        <activity android:name=".personal.PhoneActivity"
+            android:parentActivityName=".PersonalActivity"/>
+        <activity android:name=".personal.NameActivity"
+            android:parentActivityName=".PersonalActivity"/>
+        <activity android:name=".PersonalActivity" />
+        <activity android:name=".FavoriteActivity" />
         <activity
             android:name=".HisOrderActivity"
             android:label="@string/title_activity_his_order"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".KindActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".AccountActivity" />
         <activity android:name=".OrderActivity" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".DetailsActivity"
             android:parentActivityName=".MainActivity" />

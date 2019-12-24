@@ -80,15 +80,30 @@
                             android:layout_height="wrap_content" />
 
                     </LinearLayout>
-                    <Button
-                        android:text="Thêm vào giỏ hàng"
-                        android:textColor="#d1583a"
-                        android:textSize="15sp"
-                        android:id="@+id/buttondatmua"
-                        android:layout_margin="3dp"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <Button
+                            android:text="Thêm vào giỏ hàng"
+                            android:textColor="#d1583a"
+                            android:textSize="15sp"
+                            android:id="@+id/buttondatmua"
+                            android:layout_margin="3dp"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"/>
+
+                        <Button
+                            android:text="Thích"
+                            android:id="@+id/buttonfavorite"
+                            android:textColor="#d1583a"
+                            android:textSize="15sp"
+                            android:layout_width="150dp"
+                            android:layout_margin="3dp"
+                            android:layout_height="wrap_content"/>
+
                     </LinearLayout>
+                </LinearLayout>
 
 
                 <LinearLayout
