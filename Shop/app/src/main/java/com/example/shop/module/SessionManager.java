@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 
 import com.example.shop.classoop.Cart;
 import com.example.shop.classoop.CartProduct;
+import com.example.shop.classoop.FavoriteProduct;
 import com.example.shop.classoop.ListCartProduct;
+import com.example.shop.classoop.ListFavoriteProduct;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -59,6 +61,24 @@ public class SessionManager {
         json = preferences.getString("MyCart", "");
         Gson gson = new Gson();
         return gson.fromJson(json, ListCartProduct.class);
+    }
+
+    public void SetFavorite(ListFavoriteProduct list){
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        editor.putString("MyFavorite", json);
+        editor.commit();
+    }
+
+    public ListFavoriteProduct GetFavorite(){
+        String json = preferences.getString("MyFavorite", "");
+        if(json.equals("")){
+            ListFavoriteProduct list = new ListFavoriteProduct(new ArrayList<FavoriteProduct>());
+            SetFavorite(list);
+        }
+        json = preferences.getString("MyFavorite", "");
+        Gson gson = new Gson();
+        return gson.fromJson(json, ListFavoriteProduct.class);
     }
 
     public void Clear(){

@@ -3,14 +3,6 @@ package com.example.shop.module;
 
 public class Server {
     public static String localhost ="sbanhang123.000webhostapp.com";
-    public static String LoaiSanPham ="http://"+ localhost +"/server/getloaisanpham.php";
-    public static String SanPhamMoiNhat="http://"+ localhost+ "/server/getsanphammoinhat.php";
-    public static String SanPham = "http://"+ localhost+ "/server/getsanpham.php";
-    public static String SanPhamFlashSale = "http://"+ localhost+ "/server/getsanphamflashsale.php";
-    public static String ThongTinKhachHang ="http://"+ localhost +"/server/thongtinkhachhang.php";
-    public static String ChiTietDonHang ="http://"+ localhost +"/server/chitietdonhang.php";
-    public static String signup ="http://"+ localhost +"/server/signup.php";
-    public static String signin ="http://"+ localhost +"/server/signin.php";
 
     // add more link to use
     public static String server = "http://"+ localhost +"/server/";
@@ -27,8 +19,8 @@ public class Server {
     public static String getHisOrder = "http://"+ localhost +"/server/hisorder.php";
     public static String upOrder = "http://"+ localhost +"/server/postorder.php";
     public static String getUpOrderDetail = "http://"+ localhost +"/server/postorderdetail.php";
+    public  static  String updatename = "http://"+ localhost +"/server/updatename.php";
+    public  static  String updatephone = "http://"+ localhost +"/server/updatephone.php";
 
-
-    // đường dẫn tự đặt, cái trên ví dụ, localHost điền vào
 
 }

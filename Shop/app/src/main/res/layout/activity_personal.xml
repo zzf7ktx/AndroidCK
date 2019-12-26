@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PersonalActivity"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarPersonal"
+        android:background="@color/colorToolBar"
+        app:title="@string/toolBarPersonal"
+        app:titleTextColor="#FFF"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Họ và tên: "
+                    android:textColor="#FF000000"
+                    android:textSize="23sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvNamePersonal"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6B6A6A"
+                    android:textSize="23sp">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/btnName"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_action_arrow_right" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại: "
+                    android:textColor="#FF000000"
+                    android:textSize="23sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvPhonePersonal"
+                    android:layout_width="165dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6B6A6A"
+                    android:textSize="23sp">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/btnPhone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_action_arrow_right" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email: "
+                    android:textColor="#FF000000"
+                    android:textSize="23sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tvMailPersonal"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#6B6A6A"
+                    android:textSize="22sp">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/btnEmail"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_action_arrow_right" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:text="Thay đổi mật khẩu"
+                    android:textColor="#FF000000"
+                    android:textSize="23sp">
+                </TextView>
+
+                <ImageButton
+                    android:id="@+id/btnPassWord"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_action_arrow_right" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</LinearLayout>
