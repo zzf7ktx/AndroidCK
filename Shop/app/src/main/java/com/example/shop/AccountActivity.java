@@ -1,30 +1,22 @@
 package com.example.shop;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.shop.adapter.OrdersAdapter;
-import com.example.shop.classoop.Navigation;
-import com.example.shop.classoop.Order;
-import com.example.shop.classoop.Product;
 import com.example.shop.classoop.UserInfo;
 import com.example.shop.module.Server;
 import com.example.shop.module.SessionManager;
@@ -34,19 +26,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AccountActivity extends AppCompatActivity {
     Context context;
     Toolbar toolbarAccount;
     SessionManager sessionManager;
+    CardView cvChat;
     TextView tvMail;
     TextView tvName;
     TextView tvLogout;
     TextView tvQLDH;
-    TextView tvSPYT;
-    TextView tvTTCN;
     ArrayList<UserInfo> userInfos;
     int id;
 
@@ -64,9 +53,7 @@ public class AccountActivity extends AppCompatActivity {
         id = sessionManager.GetUser();
         tvLogout = findViewById(R.id.tvLogout);
         tvQLDH = findViewById(R.id.tvQLDH);
-        tvSPYT = findViewById(R.id.tvSPYT);
-        tvTTCN = findViewById(R.id.tvTTCN);
-
+        cvChat = findViewById(R.id.Account_btn_chat);
         userInfos = new ArrayList<>();
         String url = Server.getinfo + "?id=" + id;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
@@ -75,14 +62,13 @@ public class AccountActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        for (int i = 0; i < response.length();i++){
+                        for(int i = 0; i < response.length();i++){
                             try {
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 userInfos.add (new UserInfo(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("ten"),
-                                        jsonObject.getString("email"),
-                                        jsonObject.getString("sdt")
+                                        jsonObject.getString("email")
                                 ));
                                 tvMail.setText(userInfos.get(0).getEmail());
                                 tvName.setText(userInfos.get(0).getTen());
@@ -122,18 +108,22 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(comeBack);
             }
         });
-        tvSPYT.setOnClickListener(new View.OnClickListener() {
+
+        if(id < 1){
+            cvChat.setEnabled(false);
+        }
+        cvChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AccountActivity.this, FavoriteActivity.class);
-                startActivity(intent);
-            }
-        });
-        tvTTCN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AccountActivity.this, PersonalActivity.class);
-                startActivity(intent);
+                if(id == 1){
+                    Intent intentListChatAdmin = new Intent(AccountActivity.this, ListChatRoomActivity.class);
+                    startActivity(intentListChatAdmin);
+                } else {
+                    Intent intentUser = new Intent(AccountActivity.this, ChatActivity.class);
+                    intentUser.putExtra("id", id); // tempUser get value from convertNumber func
+                    intentUser.putExtra("idSendTo", 1);
+                    startActivity(intentUser);
+                }
             }
         });
     }

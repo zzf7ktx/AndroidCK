@@ -48,6 +48,8 @@
         <activity
             android:name=".PayActivity"
             android:parentActivityName=".CartActivity" />
+        <activity android:name=".ChatActivity"/>
+        <activity android:name=".ListChatRoomActivity"/>
     </application>
 
 </manifest>
