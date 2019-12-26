@@ -199,6 +199,15 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     startActivity(intent_12);
                 }
+                break;
+            case R.id.menuAdmin:
+                if (sessionManager.GetUser() != 0) {
+                    Intent intent_1 = new Intent(this, AdminActivity.class);
+                    startActivity(intent_1);
+                } else {
+                    startActivity(intent_12);
+                }
+                break;
 
         }
         return super.onOptionsItemSelected(item);

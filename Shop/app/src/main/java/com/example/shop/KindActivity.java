@@ -27,6 +27,7 @@ import com.example.shop.adapter.KindAdapter;
 import com.example.shop.classoop.Product;
 import com.example.shop.classoop.NameComparator;
 import com.example.shop.classoop.PriceComparator;
+import com.example.shop.classoop.PriceComparatorD;
 import com.example.shop.module.Server;
 
 import org.json.JSONArray;
@@ -101,7 +102,14 @@ public class KindActivity extends AppCompatActivity {
                 break;
             case R.id.sapxepgia:
                 orderGia = 1 - orderGia;
-                Collections.sort(products, new PriceComparator());
+                if (orderGia == 1)
+                {
+                    Collections.sort(products, new PriceComparator());
+                }
+                else
+                {
+                    Collections.sort(products, new PriceComparatorD());
+                }
                 Toast.makeText(getApplication(), String.valueOf(orderGia), Toast.LENGTH_SHORT).show();
                 kindAdapter.notifyDataSetChanged();
                 break;

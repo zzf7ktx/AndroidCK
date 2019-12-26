@@ -36,6 +36,8 @@ public class AccountActivity extends AppCompatActivity {
     TextView tvName;
     TextView tvLogout;
     TextView tvQLDH;
+    TextView tvSPYT;
+    TextView tvTTCN;
     ArrayList<UserInfo> userInfos;
     int id;
 
@@ -53,6 +55,9 @@ public class AccountActivity extends AppCompatActivity {
         id = sessionManager.GetUser();
         tvLogout = findViewById(R.id.tvLogout);
         tvQLDH = findViewById(R.id.tvQLDH);
+        tvSPYT = findViewById(R.id.tvSPYT);
+        tvTTCN = findViewById(R.id.tvTTCN);
+
         cvChat = findViewById(R.id.Account_btn_chat);
         userInfos = new ArrayList<>();
         String url = Server.getinfo + "?id=" + id;
@@ -68,7 +73,8 @@ public class AccountActivity extends AppCompatActivity {
                                 userInfos.add (new UserInfo(
                                         jsonObject.getInt("id"),
                                         jsonObject.getString("ten"),
-                                        jsonObject.getString("email")
+                                        jsonObject.getString("email"),
+                                        jsonObject.getString("sdt")
                                 ));
                                 tvMail.setText(userInfos.get(0).getEmail());
                                 tvName.setText(userInfos.get(0).getTen());
@@ -106,6 +112,21 @@ public class AccountActivity extends AppCompatActivity {
 
                 Intent comeBack = new Intent(AccountActivity.this, LoginActivity.class);
                 startActivity(comeBack);
+            }
+        });
+
+        tvSPYT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountActivity.this, FavoriteActivity.class);
+                startActivity(intent);
+            }
+        });
+        tvTTCN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccountActivity.this, PersonalActivity.class);
+                startActivity(intent);
             }
         });
 

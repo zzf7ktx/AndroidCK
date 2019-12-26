@@ -13,5 +13,9 @@
         android:id="@+id/menuAccount"
         app:showAsAction="always"
         android:title="Logout" />
-
+    <item
+        android:icon="@drawable/sortprice"
+        android:id="@+id/menuAdmin"
+        app:showAsAction="always"
+        android:title="Admin" />
 </menu>

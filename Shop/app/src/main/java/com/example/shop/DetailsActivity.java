@@ -1,11 +1,5 @@
 package com.example.shop;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,14 +10,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.shop.classoop.CartProduct;
 import com.example.shop.classoop.FavoriteProduct;
@@ -32,8 +29,6 @@ import com.example.shop.classoop.ListFavoriteProduct;
 import com.example.shop.classoop.Product;
 import com.example.shop.module.Server;
 import com.example.shop.module.SessionManager;
-import com.like.LikeButton;
-import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -41,7 +36,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 public class DetailsActivity extends AppCompatActivity {
     int values;
