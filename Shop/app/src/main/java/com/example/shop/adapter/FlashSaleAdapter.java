@@ -72,7 +72,7 @@ public class FlashSaleAdapter extends RecyclerView.Adapter<FlashSaleAdapter.ITem
                     Intent intent=new Intent(context, DetailsActivity.class);
                     intent.putExtra("id",arraysanpham.get(getAdapterPosition()).getID());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    CheckConnect.ShowToast_Short(context, String.valueOf(arraysanpham.get(getAdapterPosition()).getID()));
+                    //CheckConnect.ShowToast_Short(context, String.valueOf(arraysanpham.get(getAdapterPosition()).getID()));
                     context.startActivity(intent);
                 }
             });

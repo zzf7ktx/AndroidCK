@@ -24,10 +24,12 @@ import java.util.ArrayList;
 public class KindAdapter extends BaseAdapter {
     Context context;
     ArrayList<Product> arrayListKind;
+    int order = 0;
 
-    public KindAdapter(Context context, ArrayList<Product> arrayListKind) {
+    public KindAdapter(Context context, ArrayList<Product> arrayListKind, int order) {
         this.context = context;
         this.arrayListKind = arrayListKind;
+        this.order = order;
     }
 
     @Override
@@ -67,7 +69,15 @@ public class KindAdapter extends BaseAdapter {
         }else{
             viewHolder= (KindAdapter.ViewHolder) convertView.getTag();
         }
-        Product sanpham= (Product) getItem(position);
+        Product sanpham;
+        if (order == 1)
+        {
+            sanpham = (Product) getItem(position);
+        }
+        else
+        {
+            sanpham = (Product) getItem(getCount() - position - 1);
+        }
         viewHolder.txttenKind.setText(sanpham.getTensanpham());
         DecimalFormat decimalFormat =new DecimalFormat("###,###,###");
         viewHolder.txtgiaKind.setText("Giá: "+ decimalFormat.format(sanpham.getGiasanpham())+"Đ");

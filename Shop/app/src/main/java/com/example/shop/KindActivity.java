@@ -1,12 +1,17 @@
 package com.example.shop;
 
+import java.util.Comparator;
+import  java.util.Collections;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +25,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.shop.adapter.KindAdapter;
 import com.example.shop.classoop.Product;
+import com.example.shop.classoop.NameComparator;
+import com.example.shop.classoop.PriceComparator;
 import com.example.shop.module.Server;
 
 import org.json.JSONArray;
@@ -27,11 +34,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class KindActivity extends AppCompatActivity {
     ArrayList<Product> products;
     KindAdapter kindAdapter;
     ListView lvKind;
+    int orderGia = 0;
+    int orderTen = 0;
 
     Toolbar toolbar;
 
@@ -43,7 +54,7 @@ public class KindActivity extends AppCompatActivity {
         String kind = getIntent().getStringExtra("loai");
         // var
         products = new ArrayList<>();
-        kindAdapter = new KindAdapter(getApplication(), products);
+        kindAdapter = new KindAdapter(getApplication(), products, 1);
         lvKind = findViewById(R.id.lvKind);
         lvKind.setAdapter(kindAdapter);
 
@@ -70,6 +81,37 @@ public class KindActivity extends AppCompatActivity {
             }
         });
     }
+     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu2, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Intent intent_12 = new Intent(this, LoginActivity.class);
+        //Toast.makeText(getApplication(), String.valueOf(orderTen), Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {
+            case R.id.sapxepten:
+                orderTen = 1 - orderTen;
+                Collections.sort(products, new NameComparator());
+                Toast.makeText(getApplication(), String.valueOf(orderTen), Toast.LENGTH_SHORT).show();
+                kindAdapter.notifyDataSetChanged();
+                break;
+            case R.id.sapxepgia:
+                orderGia = 1 - orderGia;
+                Collections.sort(products, new PriceComparator());
+                Toast.makeText(getApplication(), String.valueOf(orderGia), Toast.LENGTH_SHORT).show();
+                kindAdapter.notifyDataSetChanged();
+                break;
+
+            default:
+                Toast.makeText(getApplication(), "Fail", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void GetProduct(String url){
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
 
