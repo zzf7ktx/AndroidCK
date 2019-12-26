@@ -144,6 +144,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/Account_btn_chat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp">
@@ -160,7 +161,7 @@
                             android:layout_gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nhận xét"
+                            android:text="Nhắn tin"
                             android:textColor="#000000"
                             android:textSize="20sp">
 
